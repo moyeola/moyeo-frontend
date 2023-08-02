@@ -14,6 +14,7 @@
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "endpoint-client": "^0.1.1",
+    "moyeo-object": "^0.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
