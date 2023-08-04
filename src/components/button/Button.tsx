@@ -1,25 +1,49 @@
 import { ButtonHTMLAttributes } from "react";
-import { css, styled } from "styled-components";
+import { Link } from "react-router-dom";
+import { RuleSet, css, styled } from "styled-components";
 
-interface ButtonProps {
+type ButtonType = "primary" | "secondary";
+
+export interface ButtonProps {
     children?: React.ReactNode;
     onClick?: ButtonHTMLAttributes<HTMLButtonElement>["onClick"];
-    type?: "primary" | "secondary";
+    type?: ButtonType;
+    as?: "a" | "Link";
+    to?: string;
+    disabled?: boolean;
 }
 
-const buttonStyleByType = {
-    primary: css`
-        background-color: ${({ theme }) => theme.color.primary};
-        color: ${({ theme }) => theme.color.gray07};
-    `,
-    secondary: css`
-        background-color: ${({ theme }) => theme.color.secondary};
-        color: ${({ theme }) => theme.color.gray07};
-    `,
+const buttonStyleByType: {
+    [key in ButtonType]: {
+        abled: RuleSet<object>;
+        disabled: RuleSet<object>;
+    };
+} = {
+    primary: {
+        abled: css`
+            background-color: ${({ theme }) => theme.color.primary};
+            color: ${({ theme }) => theme.color.gray07};
+        `,
+        disabled: css`
+            background-color: ${({ theme }) => theme.color.statusInactive};
+            color: ${({ theme }) => theme.color.gray07};
+        `,
+    },
+    secondary: {
+        abled: css`
+            background-color: ${({ theme }) => theme.color.secondary};
+            color: ${({ theme }) => theme.color.gray07};
+        `,
+        disabled: css`
+            background-color: ${({ theme }) => theme.color.statusInactive};
+            color: ${({ theme }) => theme.color.gray07};
+        `,
+    },
 };
 
-const StyledButton = styled.button<{ type: ButtonProps["type"] }>`
-    ${({ type }) => buttonStyleByType[type || "primary"]}
+const StyledButton = styled.button<{ type: ButtonType; disabled: boolean }>`
+    ${({ type, disabled }) =>
+        buttonStyleByType[type || "primary"][disabled ? "disabled" : "abled"]}
     border: none;
     width: 100%;
     display: flex;
@@ -28,11 +52,41 @@ const StyledButton = styled.button<{ type: ButtonProps["type"] }>`
     padding: 16px;
     border-radius: 12px;
     font-size: 16px;
+    text-decoration: none;
+    user-select: none;
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;
 
-export function Button({ children, onClick, type = "primary" }: ButtonProps) {
+export function Button({
+    children,
+    onClick,
+    type = "primary",
+    disabled = false,
+    as,
+    to,
+}: ButtonProps) {
+    if (as === "a")
+        return (
+            <StyledButton as="a" type={type} href={to} disabled={disabled}>
+                {children}
+            </StyledButton>
+        );
+
+    if (as === "Link") {
+        return (
+            <StyledButton
+                as={Link}
+                type={type}
+                to={to || "/"}
+                disabled={disabled}
+            >
+                {children}
+            </StyledButton>
+        );
+    }
+
     return (
-        <StyledButton type={type} onClick={onClick}>
+        <StyledButton type={type} onClick={onClick} disabled={disabled}>
             {children}
         </StyledButton>
     );

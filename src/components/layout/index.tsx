@@ -1,2 +1,2 @@
 export * from "./PageLayout";
-export * from "./FooterLayout";
+export * from "./BottomLayout";

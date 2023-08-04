@@ -5,5 +5,5 @@ export type TextProps = {
     color?: Color;
 };
 export const Text = styled.p<TextProps>`
-    color: ${({ theme, color }) => theme.color[color || "gray07"]};
+    color: ${({ theme, color }) => theme.color[color || "gray01"]};
 `;

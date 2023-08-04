@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export type ContainerProps = {
     center?: boolean;
+    gap?: number;
 };
 
 export const Container = styled.div<ContainerProps>`
@@ -11,6 +12,8 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     padding: 0 16px;
     height: 100%;
+    margin: 0 auto;
+    gap: ${({ gap }) => gap || 0}px;
 
     ${({ center }) =>
         center &&

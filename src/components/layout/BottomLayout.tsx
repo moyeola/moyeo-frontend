@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const FooterLayout = styled.div`
+export const BottomLayout = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
