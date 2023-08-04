@@ -2,7 +2,7 @@ import {
     Button,
     Container,
     Flex,
-    FooterLayout,
+    BottomLayout,
     Image,
     PageLayout,
     Text,
@@ -22,11 +22,13 @@ export function IntroPage() {
                     </Flex>
                 </Container>
             </PageLayout>
-            <FooterLayout>
+            <BottomLayout>
                 <Container>
-                    <Button>접속하기</Button>
+                    <Button as="Link" to="/auth/sign-up">
+                        접속하기
+                    </Button>
                 </Container>
-            </FooterLayout>
+            </BottomLayout>
         </>
     );
 }
