@@ -19,7 +19,7 @@ export type FlexProps = {
 };
 export const Flex = styled.div<FlexProps>`
     display: flex;
-    flex-direction: ${({ column }) => "column" || "row"};
+    flex-direction: ${({ column }) => (column ? "column" : "row")};
     justify-content: ${({ justify }) => justify || "flex-start"};
     align-items: ${({ align }) => align || "flex-start"};
     flex-wrap: ${({ wrap }) => wrap || "nowrap"};
