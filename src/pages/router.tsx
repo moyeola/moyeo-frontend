@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { IndexPage } from ".";
 import { IntroPage } from "./intro/index.page";
-import { SignUpPage } from "./auth/signUp.page";
 import { AuthRouter } from "./auth/router";
 
 export function MainRouter() {

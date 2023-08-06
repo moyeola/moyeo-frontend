@@ -5,8 +5,8 @@ import {
     PageLayout,
     Spacer,
     Text,
-} from "../../components";
-import { IntroTitle } from "./components/IntroTitle";
+} from "../../../components";
+import { IntroTitle } from "../components/IntroTitle";
 
 export function SignUpPage() {
     return (
