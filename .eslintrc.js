@@ -1,35 +1,24 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+    env: {
+        browser: true,
+        es2021: true,
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended',
+        'next/core-web-vitals',
+        'prettier',
     ],
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+    plugins: ['import'],
+    rules: {
+        indent: ['error', 4],
+        semi: ['warn', 'always'],
+        'no-trailing-spaces': 0,
+        'keyword-spacing': 0,
+        'no-unused-vars': 1,
+        'no-multiple-empty-lines': 0,
+        'space-before-function-paren': 0,
+        'eol-last': 0,
     },
-    "plugins": [
-        "@typescript-eslint",
-        "react"
-    ],
-    "rules": {
-    }
-}
+};
