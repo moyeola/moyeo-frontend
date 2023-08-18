@@ -1,10 +1,12 @@
+import { styled } from 'styled-components';
 import { Button, Container, Flex, BottomLayout, Image, PageLayout, Text } from '../../components';
-import MoyeoColorLogo from '../../assets/logo/moyeoColorLogo.png';
+import { Header } from '../main/component/Header';
+import { Color } from "../../style/theme";
 
 export function MainPage() {
     return (
-        <>
-            <PageLayout></PageLayout>
-        </>
+        <Container color='bgHome'>
+            <Header />
+        </Container>
     );
 }
