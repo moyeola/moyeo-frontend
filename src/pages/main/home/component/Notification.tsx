@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { Image } from '../../../components';
+import { Image } from '../../../../components';
 import NotificationLogo from '../assets/Notification.png';
 
 export function Notification() {

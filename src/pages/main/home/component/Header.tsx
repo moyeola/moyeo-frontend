@@ -1,7 +1,7 @@
-import { Image, Flex } from '../../../components';
+import { Image, Flex } from '../../../../components';
 import { HeaderContainer } from './HeaderContainer';
 import { Notification } from './Notification';
-import MoyeoColorLogo from '../../../assets/logo/moyeoColorLogo.png';
+import MoyeoColorLogo from '../../../../assets/logo/moyeoColorLogo.png';
 
 export function Header() {
     return (
