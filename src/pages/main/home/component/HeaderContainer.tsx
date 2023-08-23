@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
     height: 85px;
 
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0;
     
     /* alight-items: center; */
     text-align: center;
