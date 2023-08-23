@@ -1,18 +1,12 @@
-import { useState } from "react";
-import {
-    BottomLayout,
-    Button,
-    Container,
-    PageLayout,
-    Spacer,
-} from "../../../../components";
-import { TextField } from "../../../../components/input";
-import { IntroTitle } from "../../components/IntroTitle";
-import { ImageSelect } from "../../components/imageSelect";
+import { useState } from 'react';
+import { BottomLayout, Button, Container, PageLayout, Spacer } from '../../../../components';
+import { TextField } from '../../../../components/input';
+import { IntroTitle } from '../../components/IntroTitle';
+import { ImageSelect } from '../../components/imageSelect';
 
 export function SignUpProfilePage() {
     const [image, setImage] = useState<File>();
-    const [nickname, setNickname] = useState("");
+    const [nickname, setNickname] = useState('');
 
     return (
         <>

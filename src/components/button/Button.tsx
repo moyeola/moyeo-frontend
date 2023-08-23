@@ -1,14 +1,14 @@
-import { ButtonHTMLAttributes } from "react";
-import { Link } from "react-router-dom";
-import { RuleSet, css, styled } from "styled-components";
+import { ButtonHTMLAttributes } from 'react';
+import { Link } from 'react-router-dom';
+import { RuleSet, css, styled } from 'styled-components';
 
-type ButtonType = "primary" | "secondary";
+type ButtonType = 'primary' | 'secondary';
 
 export interface ButtonProps {
     children?: React.ReactNode;
-    onClick?: ButtonHTMLAttributes<HTMLButtonElement>["onClick"];
+    onClick?: ButtonHTMLAttributes<HTMLButtonElement>['onClick'];
     type?: ButtonType;
-    as?: "a" | "Link";
+    as?: 'a' | 'Link';
     to?: string;
     disabled?: boolean;
 }
@@ -42,8 +42,7 @@ const buttonStyleByType: {
 };
 
 const StyledButton = styled.button<{ type: ButtonType; disabled: boolean }>`
-    ${({ type, disabled }) =>
-        buttonStyleByType[type || "primary"][disabled ? "disabled" : "abled"]}
+    ${({ type, disabled }) => buttonStyleByType[type || 'primary'][disabled ? 'disabled' : 'abled']}
     border: none;
     width: 100%;
     display: flex;
@@ -54,30 +53,35 @@ const StyledButton = styled.button<{ type: ButtonType; disabled: boolean }>`
     font-size: 16px;
     text-decoration: none;
     user-select: none;
-    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
 
 export function Button({
     children,
     onClick,
-    type = "primary",
+    type = 'primary',
     disabled = false,
     as,
     to,
 }: ButtonProps) {
-    if (as === "a")
+    if (as === 'a')
         return (
-            <StyledButton as="a" type={type} href={to} disabled={disabled}>
+            <StyledButton
+                as="a"
+                type={type}
+                href={to}
+                disabled={disabled}
+            >
                 {children}
             </StyledButton>
         );
 
-    if (as === "Link") {
+    if (as === 'Link') {
         return (
             <StyledButton
                 as={Link}
                 type={type}
-                to={to || "/"}
+                to={to || '/'}
                 disabled={disabled}
             >
                 {children}
@@ -86,7 +90,11 @@ export function Button({
     }
 
     return (
-        <StyledButton type={type} onClick={onClick} disabled={disabled}>
+        <StyledButton
+            type={type}
+            onClick={onClick}
+            disabled={disabled}
+        >
             {children}
         </StyledButton>
     );

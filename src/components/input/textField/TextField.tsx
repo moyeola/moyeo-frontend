@@ -1,4 +1,4 @@
-import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { useImperativeHandle, useRef, useState } from "react";
 import { styled } from "styled-components";
 
 export type TextFieldProps = {
@@ -14,7 +14,7 @@ const Div = styled.div`
     width: 100%;
 `;
 
-const Label = styled.label`
+const Label = styled.label` 
     display: block;
     font-size: 14px;
     font-weight: 700;
