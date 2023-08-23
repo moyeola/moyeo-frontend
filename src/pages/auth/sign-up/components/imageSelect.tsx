@@ -4,7 +4,6 @@ import PenIcon from "../assets/pen.svg";
 import ProfilePlaceholder from "../assets/profilePlaceholder.png";
 
 import styled from "styled-components";
-import { cv } from "../../../style";
 
 const Div = styled.div`
     display: flex;
@@ -42,7 +41,7 @@ const PenIconDiv = styled.div`
     justify-content: center;
 
     padding: 8px;
-    background-color: ${cv.primary};
+    background-color: ${({ theme }) => theme.color.primary};
     border-radius: 1000px;
     cursor: pointer;
 `;

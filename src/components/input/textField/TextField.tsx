@@ -1,5 +1,6 @@
 import React, { useImperativeHandle, useRef, useState } from "react";
 import { styled } from "styled-components";
+import { cv } from "../../../style";
 
 export type TextFieldProps = {
     label?: string;
@@ -14,19 +15,19 @@ const Div = styled.div`
     width: 100%;
 `;
 
-const Label = styled.label` 
+const Label = styled.label`
     display: block;
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 8px;
-    color: ${({ theme }) => theme.color.gray04};
+    color: ${cv.gray04};
 `;
 
 const StyledTextField = styled.input`
     outline: none;
     border: none;
     padding: 8px;
-    border-bottom: 2px solid ${({ theme }) => theme.color.primary};
+    border-bottom: 2px solid ${cv.primary};
     font-size: 20px;
 `;
 
@@ -35,11 +36,11 @@ const MaxLength = styled.span`
     bottom: 14px;
     right: 8px;
     font-size: 16px;
-    color: ${({ theme }) => theme.color.gray04};
+    color: ${cv.gray04};
     letter-spacing: -5%;
 
     span {
-        color: ${({ theme }) => theme.color.gray01};
+        color: ${cv.gray01};
     }
 `;
 
