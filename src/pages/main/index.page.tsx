@@ -4,7 +4,7 @@ import { Home } from '../main/home/index';
 
 export function MainPage() {
     return (
-        <Container color="bgHome">
+        <Container>
             <Home />
         </Container>
     );
