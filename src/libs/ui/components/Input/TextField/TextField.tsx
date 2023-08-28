@@ -1,6 +1,6 @@
 import React, { useImperativeHandle, useRef, useState } from "react";
 import { styled } from "styled-components";
-import { cv } from "../../../libs/ui/style";
+import { cv } from "../../../style";
 
 export type TextFieldProps = {
     label?: string;

@@ -4,7 +4,7 @@ import PenIcon from "../assets/pen.svg";
 import ProfilePlaceholder from "../assets/profilePlaceholder.png";
 
 import styled from "styled-components";
-import { cv } from "../../../style";
+import { cv } from "../../../libs/ui/style";
 
 const Div = styled.div`
     display: flex;

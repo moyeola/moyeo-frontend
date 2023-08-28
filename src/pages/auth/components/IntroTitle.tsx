@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { cv } from "../../../style";
+import { cv } from "../../../libs/ui/style";
 
 export const IntroTitle = styled.h1`
     font-size: 24px;

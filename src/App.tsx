@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 import { RootRouter } from "./pages/router";
-import { GlobalStyles } from "./style/globalStyle";
+import { MoyeoUiWrapper } from "./libs/ui";
 
 const queryClient = new QueryClient();
 
@@ -10,8 +10,9 @@ function App() {
     return (
         <RecoilRoot>
             <QueryClientProvider client={queryClient}>
-                <RootRouter />
-                <GlobalStyles />
+                <MoyeoUiWrapper>
+                    <RootRouter />
+                </MoyeoUiWrapper>
                 <ReactQueryDevtools />
             </QueryClientProvider>
         </RecoilRoot>
