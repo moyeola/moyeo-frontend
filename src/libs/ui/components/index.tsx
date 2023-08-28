@@ -6,3 +6,5 @@ export * from "./Spacer";
 export * from "./Input";
 export * from "./Text";
 export * from "./MoyeoUiWrapper";
+export * from "./NavBar";
+export * from "./Switch";
