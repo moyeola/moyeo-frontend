@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
     StyledModalContainer,
     StyledModalContainerWrapper,
@@ -8,7 +8,8 @@ import {
 export interface ModalContainerProps {
     children?: React.ReactNode;
     isOpen: boolean;
-    setIsOpen: (isOpen: boolean) => void;
+    close: () => void;
+    closeFinish: () => void;
     hasPadding?: boolean;
     width?: string;
     direction?: "center" | "bottom";
@@ -16,7 +17,8 @@ export interface ModalContainerProps {
 export function ModalContainer({
     children,
     isOpen,
-    setIsOpen,
+    close,
+    closeFinish,
     hasPadding = true,
     width = "fit-content",
     direction = "center",
@@ -29,17 +31,21 @@ export function ModalContainer({
     const transitionTimer = useRef<NodeJS.Timeout>();
     const modalContentRef = useRef<HTMLDivElement>(null);
 
+    const closeModal = useCallback(() => {
+        clearTimeout(transitionTimer.current);
+        transitionTimer.current = setTimeout(() => {
+            closeFinish();
+            setIsShow(false);
+        }, 300);
+    }, [closeFinish]);
+
     useEffect(() => {
         if (isOpen) {
             setIsShow(true);
         } else {
-            clearTimeout(transitionTimer.current);
-            transitionTimer.current = setTimeout(() => {
-                setIsOpen(false);
-                setIsShow(false);
-            }, 300);
+            closeModal();
         }
-    }, [isOpen, setIsOpen]);
+    }, [closeModal, isOpen]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -47,7 +53,7 @@ export function ModalContainer({
                 modalContentRef.current &&
                 !modalContentRef.current.contains(event.target as Node)
             ) {
-                setIsOpen(false);
+                close();
                 event.preventDefault();
             }
         };
@@ -55,7 +61,7 @@ export function ModalContainer({
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [setIsOpen]);
+    }, [close]);
 
     if (!isShow) {
         return null;

@@ -8,3 +8,4 @@ export * from "./Text";
 export * from "./MoyeoUiWrapper";
 export * from "./NavBar";
 export * from "./Switch";
+export * from "./Modal";
