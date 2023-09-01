@@ -9,3 +9,4 @@ export * from "./MoyeoUiWrapper";
 export * from "./NavBar";
 export * from "./Switch";
 export * from "./Modal";
+export * from "./Header";
