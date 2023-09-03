@@ -1,9 +1,8 @@
 import { ButtonHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
-import { RuleSet, css, styled } from "styled-components";
-import { cv } from "../../style";
+import { StyledButton } from "./Button.style";
 
-type ButtonType = "primary" | "secondary";
+export type ButtonType = "primary";
 
 export interface ButtonProps {
     children?: React.ReactNode;
@@ -23,52 +22,6 @@ export interface ButtonProps {
     disabled?: boolean;
     type?: "button" | "submit" | "reset";
 }
-
-const buttonStyleByType: {
-    [key in ButtonType]: {
-        abled: RuleSet<object>;
-        disabled: RuleSet<object>;
-    };
-} = {
-    primary: {
-        abled: css`
-            background-color: ${cv.primary};
-            color: ${cv.gray07};
-        `,
-        disabled: css`
-            background-color: ${cv.statusInactive};
-            color: ${cv.gray07};
-        `,
-    },
-    secondary: {
-        abled: css`
-            background-color: ${cv.secondary};
-            color: ${cv.gray07};
-        `,
-        disabled: css`
-            background-color: ${cv.statusInactive};
-            color: ${cv.gray07};
-        `,
-    },
-};
-
-const StyledButton = styled.button<{ variant: ButtonType; disabled: boolean }>`
-    ${({ variant, disabled }) =>
-        buttonStyleByType[variant || "primary"][
-            disabled ? "disabled" : "abled"
-        ]}
-    border: none;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    border-radius: 12px;
-    font-size: 16px;
-    text-decoration: none;
-    user-select: none;
-    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-`;
 
 /**
  * 버튼 컴포넌트입니다.
