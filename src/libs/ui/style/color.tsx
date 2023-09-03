@@ -3,7 +3,7 @@ export const colors = {
     secondary: "#FFA151",
     gray01: "#252525",
     gray02: "#383838",
-    gray03: "#2E2E2E",
+    gray03: "#535353",
     gray04: "#8C8C8C",
     gray05: "#D4D4D4",
     gray06: "#E9E9E9",
@@ -13,6 +13,7 @@ export const colors = {
     markerTagBlue: "#DCE1E8",
     statusActiveBlack: "#383838",
     statusInactive: "#B6B6B6",
+    statusHover: "#eb5400",
     bgOnboarding: "#FFFFFF",
     bgHome: "#F8F8FA",
 };
