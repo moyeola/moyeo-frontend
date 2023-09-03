@@ -2,7 +2,7 @@ import { Flex, Image, TopLayout } from "../../../../../components";
 import MoyeoLogo from "../../../../../assets/logo/moyeoColorLogo.png";
 import { Bell } from "@phosphor-icons/react";
 import { styled } from "styled-components";
-import { cv } from "../../../../../style";
+import { cv } from "../../../../../libs/ui/style";
 
 const NoticeBellContainer = styled.div`
     position: relative;

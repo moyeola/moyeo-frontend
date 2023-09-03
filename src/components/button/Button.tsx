@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
 import { RuleSet, css, styled } from "styled-components";
-import { cv } from "../../style";
+import { cv } from "../../libs/ui/style";
 
 type ButtonType = "primary" | "secondary";
 
