@@ -1,4 +1,4 @@
-import { BottomLayout, Button, Flex, Layout, Text } from "../../../components";
+import { BottomLayout, Button, Flex, Layout, Text } from "../../../libs/ui";
 import { IntroTitle } from "../components/IntroTitle";
 
 export function SignUpPage() {

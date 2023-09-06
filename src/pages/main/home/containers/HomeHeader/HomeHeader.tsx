@@ -1,8 +1,8 @@
-import { Flex, Image, TopLayout } from "../../../../../components";
 import MoyeoLogo from "../../../../../assets/logo/moyeoColorLogo.png";
 import { Bell } from "@phosphor-icons/react";
 import { styled } from "styled-components";
 import { cv } from "../../../../../libs/ui/style";
+import { Header, Image } from "../../../../../libs/ui";
 
 const NoticeBellContainer = styled.div`
     position: relative;
@@ -29,11 +29,13 @@ function NoticeBell({ hasNotice }: { hasNotice: boolean }) {
 
 export function HomeHeader() {
     return (
-        <TopLayout>
-            <Flex justify="space-between">
+        <Header bgColor={cv.bgHome}>
+            <Header.Left>
                 <Image src={MoyeoLogo} alt="Moyeo Logo" height="28px" />
+            </Header.Left>
+            <Header.Right>
                 <NoticeBell hasNotice={true} />
-            </Flex>
-        </TopLayout>
+            </Header.Right>
+        </Header>
     );
 }

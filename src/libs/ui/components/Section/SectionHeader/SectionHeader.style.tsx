@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import { cv } from "../../../style";
-import { Link } from "react-router-dom";
 
 export const StyledSectionHeader = styled.div`
     display: flex;

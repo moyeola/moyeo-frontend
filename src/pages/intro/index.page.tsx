@@ -1,12 +1,5 @@
-import {
-    Button,
-    Flex,
-    BottomLayout,
-    Image,
-    Text,
-    Layout,
-} from "../../components";
 import MoyeoColorLogo from "../../assets/logo/moyeoColorLogo.png";
+import { BottomLayout, Button, Flex, Image, Layout, Text } from "../../libs/ui";
 
 export function IntroPage() {
     return (
