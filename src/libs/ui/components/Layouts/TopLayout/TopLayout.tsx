@@ -11,6 +11,7 @@ const TopLayoutOuter = styled.div<LayoutOuterProps>`
     background-color: ${(props) => props.$bgColor};
     display: flex;
     justify-content: center;
+    z-index: 10;
 `;
 
 interface LayoutInnerProps {

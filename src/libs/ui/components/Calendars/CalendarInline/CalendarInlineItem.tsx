@@ -29,18 +29,23 @@ const dayOfTheWeekMap = (dotw: string) => {
 };
 
 export interface CalendarInlineItemProps {
+    onClick?: () => void;
     date: string;
     events: {
         title: string;
     }[];
 }
-export function CalendarInlineItem({ date, events }: CalendarInlineItemProps) {
+export function CalendarInlineItem({
+    date,
+    events,
+    onClick,
+}: CalendarInlineItemProps) {
     const _date = dayjs(date);
     const day = _date.format("D");
     const dayOfTheWeek = dayOfTheWeekMap(_date.format("ddd"));
 
     return (
-        <StyledCalendarInlineItem>
+        <StyledCalendarInlineItem onClick={() => onClick && onClick()}>
             <StyledCalendarInlineItemDayOfTheWeek>
                 {dayOfTheWeek}
             </StyledCalendarInlineItemDayOfTheWeek>

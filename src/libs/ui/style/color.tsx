@@ -11,11 +11,12 @@ export const colors = {
     markerBlue: "#0075FF",
     markerOrange: "#FF5B00",
     markerTagBlue: "#DCE1E8",
+    markerBaseBlue: "#F3F6F9",
     statusActiveBlack: "#383838",
     statusInactive: "#B6B6B6",
     statusHover: "#eb5400",
     bgOnboarding: "#FFFFFF",
-    bgHome: "#F8F8FA",
+    bgHome: "rgb(248, 248, 250)",
 };
 export type Color = keyof typeof colors;
 

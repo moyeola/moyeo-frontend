@@ -29,7 +29,7 @@ function NoticeBell({ hasNotice }: { hasNotice: boolean }) {
 
 export function HomeHeader() {
     return (
-        <Header bgColor={cv.bgHome}>
+        <Header bgColor="rgba(248, 248, 250, 0.9)">
             <Header.Left>
                 <Image src={MoyeoLogo} alt="Moyeo Logo" height="28px" />
             </Header.Left>

@@ -8,6 +8,7 @@ export const StyledCalendarInlineItem = styled.div`
     align-items: flex-start;
     flex-direction: column;
     overflow-x: hidden;
+    cursor: pointer;
 `;
 
 export const StyledCalendarInlineItemDayOfTheWeek = styled.p`

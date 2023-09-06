@@ -9,7 +9,12 @@ export function HomePage() {
     return (
         <>
             <HomeHeader />
-            <Layout paddingTop="90px" bgColor={cv.bgHome}>
+            <Layout
+                paddingTop="90px"
+                paddingBottom="120px"
+                bgColor={cv.bgHome}
+                minHeight="100dvh"
+            >
                 <Flex.Column gap="32px">
                     <CalendarSection />
                     <GroupSection />

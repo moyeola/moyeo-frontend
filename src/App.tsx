@@ -1,21 +1,22 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 import { RootRouter } from "./pages/router";
 import { MoyeoUiWrapper } from "./libs/ui";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
 function App() {
     return (
-        <RecoilRoot>
-            <QueryClientProvider client={queryClient}>
-                <MoyeoUiWrapper>
-                    <RootRouter />
-                </MoyeoUiWrapper>
-                <ReactQueryDevtools />
-            </QueryClientProvider>
-        </RecoilRoot>
+        <BrowserRouter>
+            <RecoilRoot>
+                <QueryClientProvider client={queryClient}>
+                    <MoyeoUiWrapper>
+                        <RootRouter />
+                    </MoyeoUiWrapper>
+                </QueryClientProvider>
+            </RecoilRoot>
+        </BrowserRouter>
     );
 }
 

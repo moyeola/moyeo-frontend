@@ -6,13 +6,11 @@ import { Redirect } from "../components";
 
 export function RootRouter() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Redirect to="/main" />} />
-                <Route path="/intro" element={<IntroPage />} />
-                <Route path="/auth/*" element={<AuthRouter />} />
-                <Route path="/main/*" element={<MainRouter />} />
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Redirect to="/main" />} />
+            <Route path="/intro" element={<IntroPage />} />
+            <Route path="/auth/*" element={<AuthRouter />} />
+            <Route path="/main/*" element={<MainRouter />} />
+        </Routes>
     );
 }
