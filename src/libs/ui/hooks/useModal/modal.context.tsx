@@ -1,4 +1,10 @@
-import { createContext, useCallback, useState } from "react";
+import {
+    createContext,
+    createRef,
+    useCallback,
+    useEffect,
+    useState,
+} from "react";
 import { ModalContainer } from "./ModalContainer";
 
 type Modal = {
@@ -7,6 +13,7 @@ type Modal = {
     width: string;
     direction: "center" | "bottom";
     hasPadding: boolean;
+    ref?: React.RefObject<HTMLDivElement>;
 };
 
 export interface ModalContextProps {
@@ -54,6 +61,7 @@ export function ModalContextProvider({
                     width: options?.width || "100%",
                     direction: options?.direction || "center",
                     hasPadding: options?.hasPadding || true,
+                    ref: createRef(),
                 },
             ]);
         },
@@ -80,6 +88,27 @@ export function ModalContextProvider({
         setModals([]);
     }, []);
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (modals.length === 0) return;
+            const modalRefs = modals.map((modal) => modal.ref?.current);
+            const isClickOutside = modalRefs.every(
+                (modalRef) =>
+                    modalRef &&
+                    !modalRef.contains(event.target as Node) &&
+                    event.target !== modalRef
+            );
+            if (isClickOutside) {
+                close();
+                event.preventDefault();
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [close, modals]);
+
     return (
         <ModalContext.Provider
             value={{
@@ -93,11 +122,11 @@ export function ModalContextProvider({
                 <ModalContainer
                     key={index}
                     isOpen={modal.isOpen}
-                    close={close}
                     closeFinish={closeFinish}
                     hasPadding={modal.hasPadding}
                     width={modal.width}
                     direction={modal.direction}
+                    ref={modal.ref}
                 >
                     {modal.content}
                 </ModalContainer>

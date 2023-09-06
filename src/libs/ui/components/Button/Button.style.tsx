@@ -26,6 +26,25 @@ export const buttonStyleByType: {
             }
         `,
     },
+
+    secondary: {
+        abled: `
+            background-color: ${cv.markerBaseBlue};
+            color: ${cv.gray04};
+
+            &:hover {
+                background-color: ${cv.markerBaseBlue};
+            }
+        `,
+        disabled: `
+            background-color: ${cv.statusInactive};
+            color: ${cv.gray07};
+
+            &:hover {
+                background-color: ${cv.statusInactive};
+            }
+        `,
+    },
 };
 
 export const StyledButton = styled.button<{

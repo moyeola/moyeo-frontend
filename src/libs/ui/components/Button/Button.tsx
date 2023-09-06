@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
 import { StyledButton } from "./Button.style";
 
-export type ButtonType = "primary";
+export type ButtonType = "primary" | "secondary";
 
 export interface ButtonProps {
     children?: React.ReactNode;

@@ -5,7 +5,7 @@ import {
     Flex,
     Layout,
     TextField,
-} from "../../../../components";
+} from "../../../../libs/ui";
 import { IntroTitle } from "../../components/IntroTitle";
 import { ImageSelect } from "../../components/imageSelect";
 

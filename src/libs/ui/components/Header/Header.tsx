@@ -15,7 +15,7 @@ export interface HeaderProps extends React.ComponentPropsWithRef<"header"> {
 const HeaderComponent = forwardRef<HTMLDivElement, HeaderProps>(
     ({ children, bgColor = cv.bgOnboarding, ...props }, ref) => {
         return (
-            <TopLayout bgColor={bgColor} paddingBottom="0px" paddingTop="0px">
+            <TopLayout bgColor={bgColor} paddingBottom="12px" paddingTop="12px">
                 <StyledHeader ref={ref} {...props}>
                     {children}
                 </StyledHeader>
