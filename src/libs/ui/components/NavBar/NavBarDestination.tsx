@@ -33,14 +33,19 @@ export interface NavBarDestinationProps {
     icon: React.ReactNode;
     label: string;
     selected?: boolean;
+    onClick?: () => void;
 }
 export function NavBarDestination({
     icon,
     label,
     selected = false,
+    onClick,
 }: NavBarDestinationProps) {
     return (
-        <StyledContainer selected={selected}>
+        <StyledContainer
+            selected={selected}
+            onClick={() => onClick && onClick()}
+        >
             <IconContext.Provider
                 value={{
                     color: selected ? cv.statusActiveBlack : cv.statusInactive,

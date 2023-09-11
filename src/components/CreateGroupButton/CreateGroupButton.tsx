@@ -11,6 +11,12 @@ const StyledButton = styled.button`
     align-items: center;
     justify-content: center;
     gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
 `;
 
 export interface CreateGroupButtonProps {

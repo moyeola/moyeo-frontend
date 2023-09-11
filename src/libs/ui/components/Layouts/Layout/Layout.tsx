@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { cv } from "../../../style";
 
 interface LayoutOuterProps {
     $bgColor?: string;
@@ -40,9 +41,9 @@ interface LayoutProps {
  */
 export function Layout({
     children,
-    bgColor,
-    paddingTop = "24px",
-    paddingBottom = "24px",
+    bgColor = cv.bgOnboarding,
+    paddingTop = "90px",
+    paddingBottom = "120px",
     minHeight = "unset",
 }: LayoutProps) {
     return (

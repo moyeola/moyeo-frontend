@@ -20,7 +20,7 @@ export function HomePage() {
                     <GroupSection />
                 </Flex.Column>
             </Layout>
-            <AppNavBar />
+            <AppNavBar selected="home" />
         </>
     );
 }

@@ -49,7 +49,7 @@ const MaxLength = styled.span`
  */
 
 export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
-    function TextField({ label, value, onChange, ...props }, ref) {
+    function TextField({ label, value, onChange, maxLength, ...props }, ref) {
         const inputRef = useRef<HTMLInputElement>(null);
         useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
@@ -73,9 +73,10 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
                     value={value || _value}
                     onChange={onChange || _onChange}
                 />
-                {label && (
+                {maxLength && (
                     <MaxLength>
-                        <span>{((value as string) || _value).length}</span> / 10
+                        <span>{((value as string) || _value).length}</span> /{" "}
+                        {maxLength}
                     </MaxLength>
                 )}
             </Div>

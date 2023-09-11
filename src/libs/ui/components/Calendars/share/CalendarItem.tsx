@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
 import {
-    StyledCalendarInlineItem,
-    StyledCalendarInlineItemDay,
-    StyledCalendarInlineItemDayOfTheWeek,
-    StyledCalendarInlineItemEvent,
-    StyledCalendarInlineItemEvents,
-} from "./CalendarInlineItem.style";
+    StyledCalendarItem,
+    StyledCalendarItemDay,
+    StyledCalendarItemDayOfTheWeek,
+    StyledCalendarItemEvent,
+    StyledCalendarItemEvents,
+} from "./CalendarItem.style";
 
 const dayOfTheWeekMap = (dotw: string) => {
     switch (dotw) {
@@ -28,37 +28,33 @@ const dayOfTheWeekMap = (dotw: string) => {
     }
 };
 
-export interface CalendarInlineItemProps {
+export interface CalendarItemProps {
     onClick?: () => void;
     date: string;
     events: {
         title: string;
     }[];
 }
-export function CalendarInlineItem({
-    date,
-    events,
-    onClick,
-}: CalendarInlineItemProps) {
+export function CalendarItem({ date, events, onClick }: CalendarItemProps) {
     const _date = dayjs(date);
     const day = _date.format("D");
     const dayOfTheWeek = dayOfTheWeekMap(_date.format("ddd"));
 
     return (
-        <StyledCalendarInlineItem onClick={() => onClick && onClick()}>
-            <StyledCalendarInlineItemDayOfTheWeek>
+        <StyledCalendarItem onClick={() => onClick && onClick()}>
+            <StyledCalendarItemDayOfTheWeek>
                 {dayOfTheWeek}
-            </StyledCalendarInlineItemDayOfTheWeek>
-            <StyledCalendarInlineItemDay>{day}</StyledCalendarInlineItemDay>
-            <StyledCalendarInlineItemEvents>
+            </StyledCalendarItemDayOfTheWeek>
+            <StyledCalendarItemDay>{day}</StyledCalendarItemDay>
+            <StyledCalendarItemEvents>
                 {events.map((event, index) => {
                     return (
-                        <StyledCalendarInlineItemEvent key={index}>
+                        <StyledCalendarItemEvent key={index}>
                             {event.title}
-                        </StyledCalendarInlineItemEvent>
+                        </StyledCalendarItemEvent>
                     );
                 })}
-            </StyledCalendarInlineItemEvents>
-        </StyledCalendarInlineItem>
+            </StyledCalendarItemEvents>
+        </StyledCalendarItem>
     );
 }

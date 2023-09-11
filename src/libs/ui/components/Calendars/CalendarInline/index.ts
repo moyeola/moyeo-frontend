@@ -1,8 +1,8 @@
+import { CalendarItem, CalendarItemProps } from "../share";
 import { CalendarInlineComponent } from "./CalendarInline";
-import { CalendarInlineItem } from "./CalendarInlineItem";
 
 export type { CalendarInlineProps } from "./CalendarInline";
-export type { CalendarInlineItemProps } from "./CalendarInlineItem";
+export type CalendarInlineItemProps = CalendarItemProps;
 export const CalendarInline = Object.assign(CalendarInlineComponent, {
-    Item: CalendarInlineItem,
+    Item: CalendarItem,
 });
