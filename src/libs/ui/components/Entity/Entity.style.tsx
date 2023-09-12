@@ -9,6 +9,7 @@ export const StyledEntity = styled.div`
     width: 100%;
     min-height: 96px;
     position: relative;
+    cursor: pointer;
 `;
 
 export const StyledEntityLeft = styled.div`

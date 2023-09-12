@@ -5,9 +5,13 @@ import { EmptyEntity, Entity, Layout, Section } from "../../../libs/ui";
 import { cv } from "../../../libs/ui/style";
 import { GroupsHeader } from "./containers/GroupsHeader";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../../hooks/useUser";
 
 export function GroupsPage() {
     const navigate = useNavigate();
+    const { user } = useUser();
+
+    const groups = user?.members.map((member) => member.group) ?? [];
 
     return (
         <>
@@ -19,6 +23,27 @@ export function GroupsPage() {
                 minHeight="100dvh"
             >
                 <Section>
+                    {groups.map((group) => (
+                        <Entity
+                            key={group?.id}
+                            title={
+                                group?.name || (
+                                    <span style={{ color: cv.gray05 }}>
+                                        (그룹 이름 없음)
+                                    </span>
+                                )
+                            }
+                            subtitle={group?.description}
+                            description="알림 2개"
+                            banner={{
+                                type: "icon",
+                                icon: "fire",
+                            }}
+                            onClick={() =>
+                                navigate(`/main/groups/${group?.id}`)
+                            }
+                        />
+                    ))}
                     <Entity
                         title="IT 프로젝트"
                         subtitle="대학생을 하나로 모아주는, 모여!"

@@ -3814,6 +3814,11 @@ clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==
 
+clsx@^1.1.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -5915,10 +5920,10 @@ mkdirp@^1.0.3:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-moyeo-object@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/moyeo-object/-/moyeo-object-0.6.4.tgz#81c824baa21c771405c2ed50ebff82eb368c8c15"
-  integrity sha512-pJrkojyTb2e3M/ySGQzpXM7JtQeo4a4MvAsx77FF+CSLymYJ6sJcSuWou0g0M/XP2J+EbntncrzaWJn+l33Zmw==
+moyeo-object@^0.6.7:
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/moyeo-object/-/moyeo-object-0.6.7.tgz#c4a07ef850cdd049222e37665ecf1212fae551d5"
+  integrity sha512-95pI3z2Lg4YqK+h86OBQl+LTQSwAL5e1Iz2S+7oLWVr9fCuLxUZRG/kBJrrkbIqtQp7P21147Gm8vZnVVCayfQ==
   dependencies:
     class-validator "^0.14.0"
     endpoint-client "^0.1.1"
@@ -6609,6 +6614,13 @@ react-style-singleton@^2.2.1:
     get-nonce "^1.0.0"
     invariant "^2.2.4"
     tslib "^2.0.0"
+
+react-toastify@^9.1.3:
+  version "9.1.3"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.1.3.tgz#1e798d260d606f50e0fab5ee31daaae1d628c5ff"
+  integrity sha512-fPfb8ghtn/XMxw3LkxQBk3IyagNpF/LIKjOBflbexr2AWxAH1MJgvnESwEwBn9liLFXgTKWgBSdZpw9m4OTHTg==
+  dependencies:
+    clsx "^1.1.1"
 
 react@^18.2.0:
   version "18.2.0"

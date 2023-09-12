@@ -11,6 +11,24 @@ import {
     PostDevAccessToken,
     PostDevAuth,
     PostGroup,
+    GetCalendar,
+    GetCalendars,
+    PatchCalendar,
+    GetCalendarEvents,
+    PostCalendarEvent,
+    PatchCalendarEvent,
+    DeleteCalendarEvent,
+    PostFile,
+    GetMeet,
+    GetMeets,
+    PostMeet,
+    PatchMeet,
+    DeleteMeet,
+    GetMeetResponse,
+    PostMeetResponse,
+    PatchMeetResponse,
+    DeleteMeetResponse,
+    SearchCalendars,
 } from "moyeo-object";
 
 export class MoyeoClient extends EndpointClient {
@@ -29,6 +47,19 @@ export class MoyeoClient extends EndpointClient {
         delete: this.endpointBuilder(DeleteGroup),
     };
 
+    readonly calendars = {
+        get: this.endpointBuilder(GetCalendar),
+        list: this.endpointBuilder(GetCalendars),
+        patch: this.endpointBuilder(PatchCalendar),
+        search: this.endpointBuilder(SearchCalendars),
+        event: {
+            list: this.endpointBuilder(GetCalendarEvents),
+            post: this.endpointBuilder(PostCalendarEvent),
+            patch: this.endpointBuilder(PatchCalendarEvent),
+            delete: this.endpointBuilder(DeleteCalendarEvent),
+        },
+    };
+
     readonly auth = {
         google: {
             post: this.endpointBuilder(PostAuthGoogle),
@@ -44,6 +75,24 @@ export class MoyeoClient extends EndpointClient {
         },
         auth: {
             post: this.endpointBuilder(PostDevAuth),
+        },
+    };
+
+    readonly files = {
+        post: this.endpointBuilder(PostFile),
+    };
+
+    readonly meets = {
+        get: this.endpointBuilder(GetMeet),
+        list: this.endpointBuilder(GetMeets),
+        post: this.endpointBuilder(PostMeet),
+        patch: this.endpointBuilder(PatchMeet),
+        delete: this.endpointBuilder(DeleteMeet),
+        response: {
+            get: this.endpointBuilder(GetMeetResponse),
+            post: this.endpointBuilder(PostMeetResponse),
+            patch: this.endpointBuilder(PatchMeetResponse),
+            delete: this.endpointBuilder(DeleteMeetResponse),
         },
     };
 }

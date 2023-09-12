@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { styled } from "styled-components";
 import { cv } from "../../../style";
 
@@ -49,34 +49,44 @@ const MaxLength = styled.span`
  */
 
 export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
-    function TextField({ label, value, onChange, maxLength, ...props }, ref) {
+    function TextField({ label, maxLength, ...props }, ref) {
         const inputRef = useRef<HTMLInputElement>(null);
         useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
-        /**
-         * TODO: maxLength 기능 구현으로 인해 제어 컴포넌트가 되었습니다.
-         * 추후 React Hook Form을 사용할 때 제어 컴포넌트로 인해 문제가 발생할 수 있으니 주의해주세요.
-         * 문제가 발생한다면 현스를 불러주세요.
-         */
-        const [_value, _setValue] = useState("");
-        const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            if (onChange) onChange(e);
-            _setValue(e.target.value);
-        };
+        const [length, setLength] = useState(0);
+
+        useEffect(() => {
+            const current = inputRef.current;
+
+            const handler = (e: KeyboardEvent) => {
+                setTimeout(() => {
+                    const target = e.target as HTMLInputElement;
+                    setLength(target.value.length);
+                }, 0);
+            };
+
+            if (current) {
+                current.addEventListener("keydown", handler);
+            }
+
+            return () => {
+                if (current) {
+                    current.removeEventListener("keypress", handler);
+                }
+            };
+        }, [maxLength]);
 
         return (
             <Div>
                 {label && <Label>{label}</Label>}
                 <StyledTextField
+                    ref={inputRef}
+                    maxLength={maxLength}
                     {...props}
-                    ref={ref}
-                    value={value || _value}
-                    onChange={onChange || _onChange}
                 />
                 {maxLength && (
                     <MaxLength>
-                        <span>{((value as string) || _value).length}</span> /{" "}
-                        {maxLength}
+                        <span>{length}</span> / {maxLength}
                     </MaxLength>
                 )}
             </Div>

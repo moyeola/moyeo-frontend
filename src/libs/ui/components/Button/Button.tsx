@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
 import { StyledButton } from "./Button.style";
+import { Spinner } from "..";
 
 export type ButtonType = "primary" | "secondary";
 
@@ -20,6 +21,7 @@ export interface ButtonProps {
      */
     to?: string;
     disabled?: boolean;
+    isLoading?: boolean;
     type?: "button" | "submit" | "reset";
 }
 
@@ -31,6 +33,7 @@ export function Button({
     onClick,
     variant = "primary",
     disabled = false,
+    isLoading = false,
     as,
     to,
     type = "button",
@@ -41,9 +44,9 @@ export function Button({
                 as="a"
                 variant={variant}
                 href={to}
-                disabled={disabled}
+                disabled={disabled || isLoading}
             >
-                {children}
+                {isLoading ? <Spinner /> : children}
             </StyledButton>
         );
 
@@ -53,10 +56,10 @@ export function Button({
                 as={Link}
                 type={type}
                 to={to || "/"}
-                disabled={disabled}
+                disabled={disabled || isLoading}
                 variant={variant}
             >
-                {children}
+                {isLoading ? <Spinner /> : children}
             </StyledButton>
         );
     }
@@ -64,11 +67,11 @@ export function Button({
     return (
         <StyledButton
             onClick={onClick}
-            disabled={disabled}
+            disabled={disabled || isLoading}
             variant={variant}
             type={type}
         >
-            {children}
+            {isLoading ? <Spinner /> : children}
         </StyledButton>
     );
 }

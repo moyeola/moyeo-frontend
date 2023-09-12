@@ -23,6 +23,7 @@ export interface EntityProps {
         icon: "fire" | "calendar";
     };
     inactive?: boolean;
+    onClick?: () => void;
 }
 export function Entity({
     banner,
@@ -30,6 +31,7 @@ export function Entity({
     inactive = false,
     subtitle: subTitle,
     title,
+    onClick,
 }: EntityProps) {
     const EntityRight = useMemo(() => {
         if (banner && banner?.type === "icon") {
@@ -52,7 +54,7 @@ export function Entity({
     }, [banner, inactive]);
 
     return (
-        <StyledEntity>
+        <StyledEntity onClick={() => onClick && onClick()}>
             <StyledEntityLeft>
                 {title && <StyledEntityTitle>{title}</StyledEntityTitle>}
                 {subTitle && (

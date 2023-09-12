@@ -32,6 +32,7 @@ export const StyledCalendarItemEvents = styled.div`
     flex-direction: column;
     gap: 4px;
     margin-top: 4px;
+    min-height: 40px;
 `;
 
 export const StyledCalendarItemEvent = styled.div`

@@ -44,7 +44,7 @@ export function Layout({
     bgColor = cv.bgOnboarding,
     paddingTop = "90px",
     paddingBottom = "120px",
-    minHeight = "unset",
+    minHeight = "100vh",
 }: LayoutProps) {
     return (
         <LayoutOuter $bgColor={bgColor} $minHeight={minHeight}>
