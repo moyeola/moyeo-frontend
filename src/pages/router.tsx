@@ -3,6 +3,7 @@ import { IntroPage } from "./intro/index.page";
 import { AuthRouter } from "./auth/router";
 import { MainRouter } from "./main/router";
 import { Redirect } from "../components";
+import { CalenderRouter } from "./main/calender/router";
 
 export function RootRouter() {
     return (
