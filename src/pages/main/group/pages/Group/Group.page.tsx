@@ -13,6 +13,11 @@ import { useQuery } from "react-query";
 import { client } from "../../../../../libs/api";
 import dayjs from "dayjs";
 import { CalendarItemModal } from "../../../../../containers/modals/CalendarItemModal/CalendarItemModal";
+import { styled } from "styled-components";
+
+import CalendarIcon from "./assets/calendar.png";
+import FlagIcon from "./assets/flag.png";
+import { Link } from "react-router-dom";
 
 function GroupCalendarSection() {
     const modal = useModal();
@@ -84,6 +89,63 @@ function GroupCalendarSection() {
     );
 }
 
+const StyledGroupToolItem = styled(Link)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-color: ${cv.bgOnboarding};
+    text-decoration: none;
+    color: ${cv.gray01};
+    flex: 1;
+    font-size: 11px;
+    font-weight: 500;
+    gap: 4px;
+    height: 100%;
+    border-radius: 18px;
+`;
+
+const StyledGroupToolItemImage = styled.img``;
+
+function GroupToolItem({
+    name,
+    icon,
+    to,
+}: {
+    name: string;
+    icon: string;
+    to: string;
+}) {
+    return (
+        <StyledGroupToolItem to={to}>
+            <StyledGroupToolItemImage src={icon} />
+            {name}
+        </StyledGroupToolItem>
+    );
+}
+
+function DummyGroupToolItem() {
+    return (
+        <StyledGroupToolItem as={"div"} to="">
+            추후 기능 개발 예정입니다.
+        </StyledGroupToolItem>
+    );
+}
+
+function GroupToolSection() {
+    return (
+        <Section>
+            <Section.Header title="팀 도구" />
+            <Flex.Row gap="12px">
+                <GroupToolItem name="팀 초대" icon={FlagIcon} to="" />
+                <GroupToolItem name="일정 조율" icon={CalendarIcon} to="" />
+                <DummyGroupToolItem />
+            </Flex.Row>
+        </Section>
+    );
+}
+
 export function GroupPage() {
     const { group } = useGroup();
 
@@ -93,9 +155,7 @@ export function GroupPage() {
             <Layout bgColor={cv.bgHome}>
                 <Flex.Column gap="20px">
                     <GroupCalendarSection />
-                    <Section>
-                        <Section.Header title="팀 도구" />
-                    </Section>
+                    <GroupToolSection />
                 </Flex.Column>
             </Layout>
             <AppNavBar selected="group" />
