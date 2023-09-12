@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { StyledIconButton } from "./IconButton.style";
 import { IconContext } from "@phosphor-icons/react";
+import { cv } from "../../style";
 
 export interface IconButtonProps extends React.ComponentPropsWithRef<"button"> {
     size?: number | string;
@@ -14,7 +15,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
             <StyledIconButton ref={ref} $size={size} {...rest}>
                 <IconContext.Provider
                     value={{
-                        size: 20,
+                        size: 24,
+                        color: cv.statusInactive,
+                        weight: "fill",
                     }}
                 >
                     {children}
