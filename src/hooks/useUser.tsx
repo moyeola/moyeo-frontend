@@ -7,7 +7,7 @@ export function useUser() {
         return res.user;
     });
 
-    const groups = query.data?.members.map((member) => member.group);
+    const groups = query.data?.members.map((member) => member.group) || [];
 
     return {
         user: query.data,
