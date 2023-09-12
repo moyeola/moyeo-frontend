@@ -1,7 +1,6 @@
 import { cv } from "../../../libs/ui/style";
 import { Header } from "../../../libs/ui";
-import { NoticeBell } from "../../../components";
-
+import FilterIcon from "./assets/Filter.png";
 
 export function CalendarPage() {
     return (
@@ -9,8 +8,10 @@ export function CalendarPage() {
             <Header.Left></Header.Left>
             <Header.Title>캘린더</Header.Title>
             <Header.Right>
-                <NoticeBell hasNotice={true} />
+                <img src={FilterIcon} alt="필터" />
             </Header.Right>
         </Header>
+
+        
     );
 }
