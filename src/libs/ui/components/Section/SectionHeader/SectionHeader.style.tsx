@@ -10,6 +10,7 @@ export const StyledSectionHeader = styled.div`
 export const StyledSectionHeaderTitle = styled.div`
     font-size: 18px;
     font-weight: bold;
+    color: ${cv.gray01};
 `;
 
 export const StyledSectionHeaderDescription = styled.div`

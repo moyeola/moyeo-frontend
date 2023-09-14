@@ -22,7 +22,9 @@ export function GroupHeader() {
                 )}
             </Header.Title>
             <Header.Right>
-                <IconButton>
+                <IconButton
+                    onClick={() => navigate(`/main/groups/${group?.id}/edit`)}
+                >
                     <PencilSimple />
                 </IconButton>
                 <IconButton>

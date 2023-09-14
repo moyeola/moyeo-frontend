@@ -5803,10 +5803,10 @@ mkdirp@^1.0.3:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-moyeo-object@^0.6.7:
-  version "0.6.7"
-  resolved "https://registry.npmjs.org/moyeo-object/-/moyeo-object-0.6.7.tgz"
-  integrity sha512-95pI3z2Lg4YqK+h86OBQl+LTQSwAL5e1Iz2S+7oLWVr9fCuLxUZRG/kBJrrkbIqtQp7P21147Gm8vZnVVCayfQ==
+moyeo-object@^0.6.10:
+  version "0.6.10"
+  resolved "https://registry.yarnpkg.com/moyeo-object/-/moyeo-object-0.6.10.tgz#7c582fae66029ef1a1b617c2729ca9cc51b558f4"
+  integrity sha512-6rPazCFdI+T2yTlt2uDlpkQ39V81FYILBE+eEr/PTfl6sHQJf7Q4rSa0lDs4lbgkUsNhmd6LfbBWna/gw74wcA==
   dependencies:
     class-validator "^0.14.0"
     endpoint-client "^0.1.1"

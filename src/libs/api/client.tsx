@@ -29,6 +29,12 @@ import {
     PatchMeetResponse,
     DeleteMeetResponse,
     SearchCalendars,
+    GetGroupMember,
+    GetGroupMembers,
+    GetGroupsSearch,
+    PostGroupMembers,
+    PatchGroupMember,
+    DeleteGroupMember,
 } from "moyeo-object";
 
 export class MoyeoClient extends EndpointClient {
@@ -45,6 +51,14 @@ export class MoyeoClient extends EndpointClient {
         get: this.endpointBuilder(GetGroup),
         patch: this.endpointBuilder(PatchGroup),
         delete: this.endpointBuilder(DeleteGroup),
+        search: this.endpointBuilder(GetGroupsSearch),
+        members: {
+            get: this.endpointBuilder(GetGroupMember),
+            list: this.endpointBuilder(GetGroupMembers),
+            post: this.endpointBuilder(PostGroupMembers),
+            patch: this.endpointBuilder(PatchGroupMember),
+            delete: this.endpointBuilder(DeleteGroupMember),
+        },
     };
 
     readonly calendars = {

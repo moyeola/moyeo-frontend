@@ -17,6 +17,7 @@ export const colors = {
     statusHover: "#eb5400",
     bgOnboarding: "#FFFFFF",
     bgHome: "rgb(248, 248, 250)",
+    delete1: "#E53636",
 };
 export type Color = keyof typeof colors;
 
