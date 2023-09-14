@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { HomePage } from "./home/page";
 import { Redirect } from "../../components";
 import { GroupRouter } from "./group/router";
-import { CalendarRouter } from "./calender/router";
+import { CalendarRouter } from "./calendar/router";
 
 export function MainRouter() {
     return (
