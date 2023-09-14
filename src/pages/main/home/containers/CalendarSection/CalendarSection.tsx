@@ -12,7 +12,7 @@ export function CalendarSection() {
                 title="캘린더"
                 moveButton={{
                     text: "캘린더 이동하기",
-                    onClick: () => navigate("/calendar"),
+                    onClick: () => navigate("/main/calendar"),
                 }}
             />
             <CalendarInline>
