@@ -5,9 +5,12 @@ import dayjs from "dayjs";
 export type UseCalendarsEventOptions = {
     period?: number;
     start?: string;
+    calendarFilter?: {
+        hiddenCalendarIds?: number[];
+    };
 };
 export function useCalendarsEvent(options?: UseCalendarsEventOptions) {
-    const { period = 28, start: optionStart } = options || {};
+    const { period = 28, start: optionStart, calendarFilter } = options || {};
     const start = dayjs(optionStart).startOf("week") || dayjs().startOf("week");
     const end = start.add(period, "days");
     const { data: calendars } = useQuery(["calendars"], async () => {
@@ -16,20 +19,26 @@ export function useCalendarsEvent(options?: UseCalendarsEventOptions) {
     });
 
     const calendarEventQueries = useQueries(
-        calendars?.map((calendar) => ({
-            queryKey: ["calendars", calendar.id, "events"],
-            queryFn: async () => {
-                const res = await client.calendars.event.list({
-                    calendarId: calendar.id,
-                    start: start.toISOString(),
-                    end: end.toISOString(),
-                });
-                return res.events.map((event) => ({
-                    ...event,
-                    calendar,
-                }));
-            },
-        })) || []
+        calendars
+            ?.filter(
+                (calendar) =>
+                    calendarFilter?.hiddenCalendarIds?.includes(calendar.id) !==
+                    true
+            )
+            .map((calendar) => ({
+                queryKey: ["calendars", calendar.id, "events"],
+                queryFn: async () => {
+                    const res = await client.calendars.event.list({
+                        calendarId: calendar.id,
+                        start: start.toISOString(),
+                        end: end.toISOString(),
+                    });
+                    return res.events.map((event) => ({
+                        ...event,
+                        calendar,
+                    }));
+                },
+            })) || []
     );
 
     const calendarsEvents = calendarEventQueries

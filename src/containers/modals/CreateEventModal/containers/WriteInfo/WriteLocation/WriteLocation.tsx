@@ -10,14 +10,14 @@ import { cv } from "../../../../../../libs/ui/style";
 import { useRecoilState } from "recoil";
 import { createEventDataAtom } from "../../../state/createEventInfo.state";
 import { useEffect, useRef } from "react";
-import { writeInfoModeAtom } from "../WriteInfoMode.state";
+import { createEventWriteInfoModeAtom } from "../WriteInfoMode.state";
 import dayjs from "dayjs";
 import { CreateEventButton } from "../CreateButton";
 
 export function WriteLocationContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [event, setEvent] = useRecoilState(createEventDataAtom);
-    const [, setMode] = useRecoilState(writeInfoModeAtom);
+    const [, setMode] = useRecoilState(createEventWriteInfoModeAtom);
 
     useEffect(() => {
         inputRef.current?.focus();

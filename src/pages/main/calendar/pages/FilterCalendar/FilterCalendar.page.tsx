@@ -9,6 +9,10 @@ import { cv } from "../../../../../libs/ui/style";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { CaretLeft } from "@phosphor-icons/react";
+import { useQuery } from "react-query";
+import { client } from "../../../../../libs/api";
+import { useRecoilState } from "recoil";
+import { calendarFilterAtom } from "../../state/calendarFilter.state";
 
 const FilterList = styled.div`
     display: flex;
@@ -29,15 +33,32 @@ const FilterArea = styled.div`
 `;
 
 export function FilterCalendarPage() {
-    // 배열 초기화
-    const filters = [
-        "개인일정",
-        "Yourssu",
-        "IT프로젝트",
-        "SW융합해커톤",
-        "유니콘 창업팀",
-    ];
     const navigate = useNavigate();
+    const [calendarFilter, setCalendarFilter] =
+        useRecoilState(calendarFilterAtom);
+    const { data: calendars } = useQuery(["calendars"], async () => {
+        const res = await client.calendars.list({});
+        return res.calendars;
+    });
+
+    const toggleCalendarFilter = (calendarId: number) => {
+        if (calendarFilter.hiddenCalendarIds.includes(calendarId)) {
+            setCalendarFilter({
+                ...calendarFilter,
+                hiddenCalendarIds: calendarFilter.hiddenCalendarIds.filter(
+                    (id) => id !== calendarId
+                ),
+            });
+        } else {
+            setCalendarFilter({
+                ...calendarFilter,
+                hiddenCalendarIds: [
+                    ...calendarFilter.hiddenCalendarIds,
+                    calendarId,
+                ],
+            });
+        }
+    };
 
     return (
         <>
@@ -59,9 +80,19 @@ export function FilterCalendarPage() {
             >
                 <Flex.Column gap="30px">
                     <FilterList>
-                        {filters.map((filter, index) => (
+                        {calendars?.map((calendar, index) => (
                             <FilterArea key={index}>
-                                <Switch label={filter} width="300px" />
+                                <Switch
+                                    label={calendar.name}
+                                    checked={
+                                        !calendarFilter.hiddenCalendarIds.includes(
+                                            calendar.id
+                                        )
+                                    }
+                                    onChange={() =>
+                                        toggleCalendarFilter(calendar.id)
+                                    }
+                                />
                             </FilterArea>
                         ))}
                     </FilterList>

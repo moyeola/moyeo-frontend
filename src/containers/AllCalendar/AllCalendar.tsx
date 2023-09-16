@@ -2,10 +2,17 @@ import { useCalendarsEvent } from "../../hooks/useCalendarsEvent";
 import { Calendar, useModal } from "../../libs/ui";
 import { CalendarItemModal } from "../modals/CalendarItemModal/CalendarItemModal";
 
-export function AllCalendar() {
+export interface AllCalendarProps {
+    calendarFilter?: {
+        hiddenCalendarIds: number[];
+    };
+}
+export function AllCalendar({ calendarFilter }: AllCalendarProps) {
     const modal = useModal();
 
-    const { eventsSortByWeek } = useCalendarsEvent();
+    const { eventsSortByWeek } = useCalendarsEvent({
+        calendarFilter: calendarFilter,
+    });
 
     return (
         <Calendar>

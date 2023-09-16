@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useRecoilState } from "recoil";
 import { updateEventDataAtom } from "../../../state/updateEventInfo.state";
-import { writeInfoModeAtom } from "../WriteInfoMode.state";
+import { updateEventWriteInfoModeAtom } from "../WriteInfoMode.state";
 import { Flex } from "../../../../../../libs/ui";
 import {
     DateInput,
@@ -19,7 +19,7 @@ type DateMode = "normal" | "period";
 export function WriteDateContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [event, setEvent] = useRecoilState(updateEventDataAtom);
-    const [, setMode] = useRecoilState(writeInfoModeAtom);
+    const [, setMode] = useRecoilState(updateEventWriteInfoModeAtom);
 
     const dateMode: DateMode = event.end ? "period" : "normal";
     const setDateMode = (mode: DateMode) => {

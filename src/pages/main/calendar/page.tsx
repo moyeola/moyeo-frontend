@@ -1,9 +1,9 @@
 import { cv } from "../../../libs/ui/style";
-import { Header, Layout } from "../../../libs/ui";
-import FilterIcon from "./assets/Filter.png";
+import { Header, IconButton, Layout } from "../../../libs/ui";
 import { AppNavBar } from "../../../containers/AppNavBar/AppNavBar";
 import { useNavigate } from "react-router-dom";
 import { CalendarSection } from "./containers/CalendarSection";
+import { Funnel } from "@phosphor-icons/react";
 
 export function CalendarPage() {
     const navigate = useNavigate(); // Call the hook to get the navigate function
@@ -14,11 +14,11 @@ export function CalendarPage() {
                 <Header.Left></Header.Left>
                 <Header.Title>캘린더</Header.Title>
                 <Header.Right>
-                    <img
-                        src={FilterIcon}
-                        alt="필터"
-                        onClick={() => navigate("./filter")}
-                    />
+                    <IconButton
+                        onClick={() => navigate("/main/calendar/filter")}
+                    >
+                        <Funnel />
+                    </IconButton>
                 </Header.Right>
             </Header>
             <Layout

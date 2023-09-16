@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { writeInfoModeAtom } from "./WriteInfoMode.state";
+import { createEventWriteInfoModeAtom } from "./WriteInfoMode.state";
 import { WriteTitleContainer } from "./WriteTitle/WriteTitle";
 import { useEffect } from "react";
 import { WriteDateContainer } from "./WriteDate/WriteDate";
@@ -7,7 +7,7 @@ import { WriteNoticeContainer } from "./WriteNotice/WriteNotice";
 import { WriteLocationContainer } from "./WriteLocation/WriteLocation";
 
 export function WriteInfoContainer() {
-    const [mode, setMode] = useRecoilState(writeInfoModeAtom);
+    const [mode, setMode] = useRecoilState(createEventWriteInfoModeAtom);
 
     useEffect(() => {
         setMode("title");

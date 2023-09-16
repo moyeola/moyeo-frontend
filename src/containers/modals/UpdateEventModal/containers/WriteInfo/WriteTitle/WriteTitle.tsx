@@ -5,14 +5,14 @@ import { cv } from "../../../../../../libs/ui/style";
 import { useRecoilState } from "recoil";
 import { updateEventDataAtom } from "../../../state/updateEventInfo.state";
 import { useEffect, useRef } from "react";
-import { writeInfoModeAtom } from "../WriteInfoMode.state";
+import { updateEventWriteInfoModeAtom } from "../WriteInfoMode.state";
 import dayjs from "dayjs";
 import { UpdateEventButton } from "../UpdateButton";
 
 export function WriteTitleContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [event, setEvent] = useRecoilState(updateEventDataAtom);
-    const [, setMode] = useRecoilState(writeInfoModeAtom);
+    const [, setMode] = useRecoilState(updateEventWriteInfoModeAtom);
 
     useEffect(() => {
         inputRef.current?.focus();

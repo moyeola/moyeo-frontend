@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { createEventDataAtom } from "../../../state/createEventInfo.state";
-import { writeInfoModeAtom } from "../WriteInfoMode.state";
+import { createEventWriteInfoModeAtom } from "../WriteInfoMode.state";
 import { Flex } from "../../../../../../libs/ui";
 import {
     DateInput,
@@ -17,7 +17,7 @@ import { CreateEventButton } from "../CreateButton";
 export function WriteNoticeContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [event] = useRecoilState(createEventDataAtom);
-    const [, setMode] = useRecoilState(writeInfoModeAtom);
+    const [, setMode] = useRecoilState(createEventWriteInfoModeAtom);
 
     useEffect(() => {
         if (!inputRef.current) return;
