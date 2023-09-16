@@ -2,7 +2,7 @@ import { NoticeBell } from "../../../../../../components";
 import { Header, IconButton } from "../../../../../../libs/ui";
 import { cv } from "../../../../../../libs/ui/style";
 import { useGroup } from "../../../../../../hooks/useGroup";
-import { List, PencilSimple } from "@phosphor-icons/react";
+import { CaretLeft, PencilSimple } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 
 export function GroupHeader() {
@@ -13,7 +13,7 @@ export function GroupHeader() {
         <Header bgColor={cv.bgHome}>
             <Header.Left>
                 <IconButton onClick={() => navigate("/main/groups")}>
-                    <List />
+                    <CaretLeft weight="bold" />
                 </IconButton>
             </Header.Left>
             <Header.Title>
