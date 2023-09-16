@@ -9,6 +9,7 @@ const StyledEmptyEntity = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border-radius: 8px;
     gap: 8px;
     background-color: ${cv.bgOnboarding};
 `;
