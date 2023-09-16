@@ -7,6 +7,7 @@ export const StyledHeader = styled.header`
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    padding-bottom: 12px;
 `;
 
 export const StyledHeaderTitle = styled.div``;

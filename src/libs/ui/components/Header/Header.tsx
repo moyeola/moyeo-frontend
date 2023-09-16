@@ -9,16 +9,18 @@ import { TopLayout } from "..";
 import { cv } from "../../style";
 
 export interface HeaderProps extends React.ComponentPropsWithRef<"header"> {
+    subChildren?: React.ReactNode;
     children?: React.ReactNode;
     bgColor?: string;
 }
 const HeaderComponent = forwardRef<HTMLDivElement, HeaderProps>(
-    ({ children, bgColor = cv.bgOnboarding, ...props }, ref) => {
+    ({ children, bgColor = cv.bgOnboarding, subChildren, ...props }, ref) => {
         return (
-            <TopLayout bgColor={bgColor} paddingBottom="12px" paddingTop="12px">
+            <TopLayout bgColor={bgColor} paddingBottom="0px" paddingTop="12px">
                 <StyledHeader ref={ref} {...props}>
                     {children}
                 </StyledHeader>
+                {subChildren}
             </TopLayout>
         );
     }
