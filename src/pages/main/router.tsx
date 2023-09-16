@@ -4,6 +4,7 @@ import { Redirect } from "../../components";
 import { GroupRouter } from "./group/router";
 import { CalendarRouter } from "./calendar/router";
 import { NotificationRouter } from "./notification/router";
+import { MeetRouter } from "./meet/router";
 
 export function MainRouter() {
     return (
@@ -13,6 +14,7 @@ export function MainRouter() {
             <Route path="/groups/*" element={<GroupRouter />} />
             <Route path="/calendar/*" element={<CalendarRouter />} />
             <Route path="/notification/*" element={<NotificationRouter />} />
+            <Route path="/meets/*" element={<MeetRouter />} />
         </Routes>
     );
 }

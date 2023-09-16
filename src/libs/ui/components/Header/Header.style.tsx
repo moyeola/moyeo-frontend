@@ -20,6 +20,7 @@ export const StyledHeaderLeft = styled.div`
     display: flex;
     align-items: center;
     gap: 4px;
+    padding-bottom: 12px;
 `;
 
 export const StyledHeaderRight = styled.div`
@@ -30,4 +31,5 @@ export const StyledHeaderRight = styled.div`
     display: flex;
     align-items: center;
     gap: 4px;
+    padding-bottom: 12px;
 `;

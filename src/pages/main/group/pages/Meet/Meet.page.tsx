@@ -31,10 +31,8 @@ export function GroupMeetPage() {
         ["group", group?.id, "meets", meetStatus],
         async () => {
             const res = await client.meets.list({
-                creator: {
-                    type: "group",
-                    groupId: group?.id || -1,
-                },
+                creatorType: "group",
+                creatorId: group?.id || -1,
             });
             return res.meets;
         },
@@ -46,23 +44,23 @@ export function GroupMeetPage() {
     return (
         <>
             <Header
-                subChildren={
-                    <TabNav
-                        tabs={[
-                            {
-                                title: "진행 중",
-                                value: "inProgress",
-                                onClick: () => setMeetStatus("inProgress"),
-                            },
-                            {
-                                title: "완료",
-                                value: "finished",
-                                onClick: () => setMeetStatus("finished"),
-                            },
-                        ]}
-                        selected={meetStatus}
-                    />
-                }
+            // subChildren={
+            //     <TabNav
+            //         tabs={[
+            //             {
+            //                 title: "진행 중",
+            //                 value: "inProgress",
+            //                 onClick: () => setMeetStatus("inProgress"),
+            //             },
+            //             {
+            //                 title: "완료",
+            //                 value: "finished",
+            //                 onClick: () => setMeetStatus("finished"),
+            //             },
+            //         ]}
+            //         selected={meetStatus}
+            //     />
+            // }
             >
                 <Header.Left>
                     <IconButton
@@ -74,9 +72,9 @@ export function GroupMeetPage() {
                 <Header.Title>{group?.name} 일정조율</Header.Title>
                 <Header.Right />
             </Header>
-            <Layout bgColor={cv.bgHome} paddingTop="120px">
+            <Layout bgColor={cv.bgHome}>
                 <Section>
-                    <Section.Header title="진행 중인 일정 조율" />
+                    <Section.Header title="일정 조율" />
                     {data?.map((meet) => (
                         <Entity
                             key={meet.id}
@@ -86,14 +84,10 @@ export function GroupMeetPage() {
                             }}
                             title={meet.title}
                             description={meet.description}
-                            onClick={() =>
-                                navigate(
-                                    `/main/groups/${group?.id}/meets/${meet.id}`
-                                )
-                            }
-                            subtitle={
-                                meet?.responses?.length || 0 + "명 참여 중"
-                            }
+                            onClick={() => navigate(`/main/meets/${meet.id}`)}
+                            subtitle={`${group?.members.length}명 중 ${
+                                meet?.responses?.length || 0
+                            }명 참여 중`}
                         />
                     ))}
                     {data && data.length === 0 && (
