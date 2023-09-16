@@ -11,8 +11,8 @@ import {
     StyledMeetRow,
     StyledMeetRows,
     StyledTimeLabel,
-} from "./MeetPicker.style";
-import { MeetPickerProps } from "./MeetPicker.type";
+} from "./MeetResult.style";
+import { MeetResultProps } from "./MeetResult.type";
 import dayjs from "dayjs";
 import { dayOfTheWeekMap } from "../../utils/dayOfTheWeekMap";
 
@@ -23,71 +23,59 @@ const numToDateTime = (num: number, date: string) => {
     }:00`;
 };
 
-interface MeetPickerCellProps {
-    setTimes: MeetPickerProps["setTimes"];
-    times: MeetPickerProps["times"];
+interface MeetResultCellProps {
+    setTime: MeetResultProps["setTime"];
+    time: MeetResultProps["time"];
     date: string;
     start: number;
     end: number;
+    ratio: number;
     isFirstRow: boolean;
     isLastRow: boolean;
 }
-function MeetPickerCell({
+function MeetResultCell({
     date,
     end,
     start,
-    times,
-    setTimes = () => {},
+    setTime,
+    time,
     isFirstRow,
     isLastRow,
-}: MeetPickerCellProps) {
-    const isMeet = times.some((time) => {
-        return (
-            numToDateTime(start, date) === time.start &&
-            numToDateTime(end, date) === time.end
-        );
-    });
+    ratio,
+}: MeetResultCellProps) {
+    const isSelected = !!(
+        time &&
+        numToDateTime(start, date) === time.start &&
+        numToDateTime(end, date) === time.end
+    );
 
     const onClick = () => {
-        if (isMeet) {
-            setTimes(
-                times.filter(
-                    (time) =>
-                        !(
-                            numToDateTime(start, date) === time.start &&
-                            numToDateTime(end, date) === time.end
-                        )
-                )
-            );
-        } else {
-            setTimes([
-                ...times,
-                {
-                    start: numToDateTime(start, date),
-                    end: numToDateTime(end, date),
-                },
-            ]);
-        }
+        setTime({
+            start: numToDateTime(start, date),
+            end: numToDateTime(end, date),
+        });
     };
 
     return (
         <StyledMeetCell
-            $selected={isMeet}
-            onClick={() => onClick()}
+            $ratio={ratio}
             $isFirstRow={isFirstRow}
             $isLastRow={isLastRow}
             $isHalf={start % 100 === 50}
+            onClick={onClick}
+            $isSelected={isSelected}
         />
     );
 }
 
-export function MeetPicker({
+export function MeetResult({
     dates,
-    times,
-    setTimes = () => {},
+    setTime,
+    time,
     startTimeAt,
     endTimeAt,
-}: MeetPickerProps) {
+    responses,
+}: MeetResultProps) {
     const [page, setPage] = useState(0);
     const pages = Math.ceil(dates.length / 7);
     const currentDates = dates.slice(page * 7, (page + 1) * 7);
@@ -135,18 +123,39 @@ export function MeetPicker({
                             <StyledTimeLabel>
                                 {timeMinute === 0 ? timeLabel : ""}
                             </StyledTimeLabel>
-                            {currentDates.map((date, index) => (
-                                <MeetPickerCell
-                                    key={index}
-                                    date={date}
-                                    end={end}
-                                    start={start}
-                                    times={times}
-                                    setTimes={setTimes}
-                                    isFirstRow={rowIndex === 0}
-                                    isLastRow={rowIndex === rowNum - 1}
-                                />
-                            ))}
+                            {currentDates.map((date, index) => {
+                                const responsesTimes = responses
+                                    .map((response) => response.times)
+                                    .filter((times) =>
+                                        times.some(
+                                            (time) =>
+                                                time.start ===
+                                                    numToDateTime(
+                                                        start,
+                                                        date
+                                                    ) &&
+                                                time.end ===
+                                                    numToDateTime(end, date)
+                                        )
+                                    );
+
+                                return (
+                                    <MeetResultCell
+                                        key={index}
+                                        date={date}
+                                        end={end}
+                                        start={start}
+                                        time={time}
+                                        setTime={setTime}
+                                        isFirstRow={rowIndex === 0}
+                                        isLastRow={rowIndex === rowNum - 1}
+                                        ratio={
+                                            responsesTimes.length /
+                                            responses.length
+                                        }
+                                    />
+                                );
+                            })}
                         </StyledMeetRow>
                     );
                 })}
@@ -156,6 +165,7 @@ export function MeetPicker({
                     {Array.from({ length: pages }).map((_, index) => {
                         return (
                             <StyledMeetPickerPaginationButton
+                                key={index}
                                 $selected={page === index}
                                 onClick={() => setPage(index)}
                             >

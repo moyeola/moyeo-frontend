@@ -52,11 +52,19 @@ export const StyledMeetRow = styled.div`
 `;
 
 interface StyledMeetCellProps {
-    $selected: boolean;
     $isFirstRow: boolean;
     $isLastRow: boolean;
     $isHalf: boolean;
+    $isSelected: boolean;
+    $ratio: number;
 }
+const ratioToColor = (ratio: number) => {
+    if (ratio >= 0.8) return cv.time80;
+    if (ratio >= 0.6) return cv.time60;
+    if (ratio >= 0.4) return cv.time40;
+    if (ratio >= 0.2) return cv.time20;
+    return cv.time0;
+};
 export const StyledMeetCell = styled.div<StyledMeetCellProps>`
     width: 100%;
     height: 24px;
@@ -65,7 +73,9 @@ export const StyledMeetCell = styled.div<StyledMeetCellProps>`
     ${(props) => props.$isFirstRow && `border-top: 1px solid ${cv.gray06};`}
     ${(props) => props.$isLastRow && `border-bottom: 1px solid ${cv.gray06};`}
     cursor: pointer;
-    background-color: ${(props) => (props.$selected ? cv.time80 : cv.time0)};
+    background-color: ${(props) =>
+        props.$ratio ? ratioToColor(props.$ratio) : cv.time0};
+    ${(props) => props.$isSelected && `border: 1px solid ${cv.primary};`}
 `;
 
 export const StyledMeetPickerPagination = styled.div`

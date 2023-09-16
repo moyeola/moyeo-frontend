@@ -1,15 +1,16 @@
-export interface MeetPickerProps {
+export interface MeetResultProps {
     dates: string[];
-    times: {
+    setTime: (time: { start: string; end: string }) => void;
+    time?: {
         start: string;
         end: string;
-    }[];
-    setTimes?: (
+    };
+    responses: {
         times: {
             start: string;
             end: string;
-        }[]
-    ) => void;
+        }[];
+    }[];
     startTimeAt: string;
     endTimeAt: string;
 }
