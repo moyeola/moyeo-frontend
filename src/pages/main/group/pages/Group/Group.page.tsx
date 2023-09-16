@@ -133,7 +133,11 @@ function GroupToolSection() {
                     icon={FlagIcon}
                     onClick={() => shareGroup()}
                 />
-                <GroupToolItem name="일정 조율" icon={CalendarIcon} to="" />
+                <GroupToolItem
+                    name="일정 조율"
+                    icon={CalendarIcon}
+                    to="./meet"
+                />
                 <DummyGroupToolItem />
             </Flex.Row>
         </Section>
