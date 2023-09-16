@@ -65,7 +65,9 @@ export function GroupMeetPage() {
                 }
             >
                 <Header.Left>
-                    <IconButton onClick={() => navigate(-1)}>
+                    <IconButton
+                        onClick={() => navigate(`/main/groups/${group?.id}`)}
+                    >
                         <CaretLeft weight="regular" color={cv.gray01} />
                     </IconButton>
                 </Header.Left>

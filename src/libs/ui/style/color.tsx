@@ -18,6 +18,12 @@ export const colors = {
     bgOnboarding: "#FFFFFF",
     bgHome: "rgb(248, 248, 250)",
     delete1: "#E53636",
+    time100: "#FF5B00",
+    time80: "#FF7D34",
+    time60: "#FF9459",
+    time40: "#FFAA7B",
+    time20: "#FFCDB2",
+    time0: "#FFFFFF",
 };
 export type Color = keyof typeof colors;
 
