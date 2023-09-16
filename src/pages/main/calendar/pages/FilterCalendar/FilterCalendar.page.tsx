@@ -1,9 +1,14 @@
-import { Layout, Flex, Text, Header, IconButton, Switch} from "../../../../../libs/ui";
+import {
+    Layout,
+    Flex,
+    Header,
+    IconButton,
+    Switch,
+} from "../../../../../libs/ui";
 import { cv } from "../../../../../libs/ui/style";
 import styled from "styled-components";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CaretLeft } from "@phosphor-icons/react"; 
+import { CaretLeft } from "@phosphor-icons/react";
 
 const FilterList = styled.div`
     display: flex;
@@ -25,20 +30,24 @@ const FilterArea = styled.div`
 
 export function FilterCalendarPage() {
     // 배열 초기화
-    const filters = ["개인일정", "Yourssu", "IT프로젝트", "SW융합해커톤", "유니콘 창업팀"];
+    const filters = [
+        "개인일정",
+        "Yourssu",
+        "IT프로젝트",
+        "SW융합해커톤",
+        "유니콘 창업팀",
+    ];
     const navigate = useNavigate();
 
     return (
         <>
             <Header bgColor={cv.bgHome}>
                 <Header.Left>
-                        <IconButton
-                            onClick={() => navigate(`/main/calendar`)}
-                        >
-                            <CaretLeft weight="regular" color={cv.gray01} />
-                        </IconButton>
-                    </Header.Left>
-                        
+                    <IconButton onClick={() => navigate(`/main/calendar`)}>
+                        <CaretLeft weight="regular" color={cv.gray01} />
+                    </IconButton>
+                </Header.Left>
+
                 <Header.Title>일정 필터링</Header.Title>
                 <Header.Right />
             </Header>
@@ -52,10 +61,7 @@ export function FilterCalendarPage() {
                     <FilterList>
                         {filters.map((filter, index) => (
                             <FilterArea key={index}>
-                                <Switch
-                                    label={filter}
-                                    width="300px"
-                                    />
+                                <Switch label={filter} width="300px" />
                             </FilterArea>
                         ))}
                     </FilterList>

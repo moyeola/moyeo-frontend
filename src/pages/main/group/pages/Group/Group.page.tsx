@@ -199,8 +199,6 @@ function GroupToolSection() {
 }
 
 export function GroupPage() {
-    const { group } = useGroup();
-
     return (
         <>
             <GroupHeader />

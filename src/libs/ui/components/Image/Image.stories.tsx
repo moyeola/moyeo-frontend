@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { styled } from "styled-components";
 
 import { Image } from ".";
 import MoyeoColorLogo from "../../assets/moyeoColorLogo.png";

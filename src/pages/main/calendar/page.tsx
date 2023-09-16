@@ -1,5 +1,5 @@
 import { cv } from "../../../libs/ui/style";
-import { Header, Calendar, Layout } from "../../../libs/ui";
+import { Header, Layout } from "../../../libs/ui";
 import FilterIcon from "./assets/Filter.png";
 import { AppNavBar } from "../../../containers/AppNavBar/AppNavBar";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +7,17 @@ import { CalendarSection } from "./containers/CalendarSection";
 
 export function CalendarPage() {
     const navigate = useNavigate(); // Call the hook to get the navigate function
-    
+
     return (
         <>
             <Header bgColor={cv.bgHome}>
                 <Header.Left></Header.Left>
                 <Header.Title>캘린더</Header.Title>
                 <Header.Right>
-                    <img 
-                    src={FilterIcon}
-                    alt="필터"
-                    onClick={() => navigate("./filter")}
+                    <img
+                        src={FilterIcon}
+                        alt="필터"
+                        onClick={() => navigate("./filter")}
                     />
                 </Header.Right>
             </Header>
@@ -27,7 +27,7 @@ export function CalendarPage() {
                 bgColor={cv.bgHome}
                 minHeight="100dvh"
             >
-                <CalendarSection/>
+                <CalendarSection />
             </Layout>
             <AppNavBar selected="calendar" />
         </>
