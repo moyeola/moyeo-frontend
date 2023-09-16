@@ -7,17 +7,12 @@ import {
     DateInput,
     DateInputLabel,
     IconButton,
-    NextButton,
     StyledInput,
 } from "../WriteInfo.style";
-import {
-    ArrowRight,
-    BellSimple,
-    Calendar,
-    MapPin,
-} from "@phosphor-icons/react";
+import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
 import { cv } from "../../../../../../libs/ui/style";
 import dayjs from "dayjs";
+import { CreateEventButton } from "../CreateButton";
 
 export function WriteNoticeContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -59,9 +54,7 @@ export function WriteNoticeContainer() {
                         <MapPin size={22} weight="fill" color={cv.gray04} />
                     </IconButton>
                 </Flex.Row>
-                <NextButton>
-                    <ArrowRight size={20} weight="bold" />
-                </NextButton>
+                <CreateEventButton />
             </Flex.Between>
 
             <Flex.Column gap="4px">

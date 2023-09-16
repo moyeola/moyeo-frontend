@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useRecoilState } from "recoil";
-import { createEventDataAtom } from "../../../state/createEventInfo.state";
+import { updateEventDataAtom } from "../../../state/updateEventInfo.state";
 import { writeInfoModeAtom } from "../WriteInfoMode.state";
 import { Flex } from "../../../../../../libs/ui";
 import {
@@ -12,13 +12,13 @@ import {
 } from "../WriteInfo.style";
 import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
 import { cv } from "../../../../../../libs/ui/style";
-import { CreateEventButton } from "../CreateButton";
+import { UpdateEventButton } from "../UpdateButton";
 
 type DateMode = "normal" | "period";
 
 export function WriteDateContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [event, setEvent] = useRecoilState(createEventDataAtom);
+    const [event, setEvent] = useRecoilState(updateEventDataAtom);
     const [, setMode] = useRecoilState(writeInfoModeAtom);
 
     const dateMode: DateMode = event.end ? "period" : "normal";
@@ -97,7 +97,7 @@ export function WriteDateContainer() {
                     <IconButton onClick={() => setMode("location")}>
                         <MapPin size={22} weight="fill" color={cv.gray04} />
                     </IconButton>
-                    <CreateEventButton />
+                    <UpdateEventButton />
                 </Flex.Row>
             </Flex.Between>
             <Flex.Column gap="4px">

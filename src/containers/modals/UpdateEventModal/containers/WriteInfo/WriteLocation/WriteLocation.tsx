@@ -1,27 +1,39 @@
 import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
 import { Flex } from "../../../../../../libs/ui";
-import { IconButton, StyledInput } from "../WriteInfo.style";
+import {
+    IconButton,
+    LocationInput,
+    ModeButton,
+    StyledInput,
+} from "../WriteInfo.style";
 import { cv } from "../../../../../../libs/ui/style";
 import { useRecoilState } from "recoil";
-import { createEventDataAtom } from "../../../state/createEventInfo.state";
+import { updateEventDataAtom } from "../../../state/updateEventInfo.state";
 import { useEffect, useRef } from "react";
 import { writeInfoModeAtom } from "../WriteInfoMode.state";
 import dayjs from "dayjs";
-import { CreateEventButton } from "../CreateButton";
+import { UpdateEventButton } from "../UpdateButton";
 
-export function WriteTitleContainer() {
+export function WriteLocationContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [event, setEvent] = useRecoilState(createEventDataAtom);
+    const [event, setEvent] = useRecoilState(updateEventDataAtom);
     const [, setMode] = useRecoilState(writeInfoModeAtom);
 
     useEffect(() => {
         inputRef.current?.focus();
     }, []);
 
-    const changeTitle = (e: string) => {
+    const changeLocation = (e: string) => {
         setEvent({
             ...event,
-            title: e,
+            location: e,
+        });
+    };
+
+    const changeIsOnline = (isOnline: boolean) => {
+        setEvent({
+            ...event,
+            isOnline,
         });
     };
 
@@ -30,9 +42,31 @@ export function WriteTitleContainer() {
             <StyledInput
                 placeholder="일정 명을 입력해주세요."
                 value={event.title}
-                onChange={(e) => changeTitle(e.target.value)}
-                ref={inputRef}
+                onClick={() => setMode("title")}
+                readOnly
             />
+            <Flex.Column gap="8px">
+                <Flex.Row gap="7px">
+                    <ModeButton
+                        $selected={!event.isOnline}
+                        onClick={() => changeIsOnline(false)}
+                    >
+                        Offline
+                    </ModeButton>
+                    <ModeButton
+                        $selected={event.isOnline}
+                        onClick={() => changeIsOnline(true)}
+                    >
+                        Online
+                    </ModeButton>
+                </Flex.Row>
+                <LocationInput
+                    placeholder="일정 장소를 입력해주세요."
+                    value={event.location}
+                    ref={inputRef}
+                    onChange={(e) => changeLocation(e.target.value)}
+                />
+            </Flex.Column>
             <Flex.Between>
                 <Flex.Row gap="8px">
                     <IconButton onClick={() => setMode("date")}>
@@ -51,10 +85,10 @@ export function WriteTitleContainer() {
                         <BellSimple size={22} weight="fill" color={cv.gray04} />
                     </IconButton>
                     <IconButton onClick={() => setMode("location")}>
-                        <MapPin size={22} weight="fill" color={cv.gray04} />
+                        <MapPin size={22} weight="fill" color={cv.gray03} />
                     </IconButton>
                 </Flex.Row>
-                <CreateEventButton />
+                <UpdateEventButton />
             </Flex.Between>
         </Flex.Column>
     );

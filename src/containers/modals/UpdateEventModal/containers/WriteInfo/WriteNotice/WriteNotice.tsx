@@ -1,38 +1,38 @@
-import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
-import { Flex } from "../../../../../../libs/ui";
-import { IconButton, StyledInput } from "../WriteInfo.style";
-import { cv } from "../../../../../../libs/ui/style";
-import { useRecoilState } from "recoil";
-import { createEventDataAtom } from "../../../state/createEventInfo.state";
 import { useEffect, useRef } from "react";
+import { useRecoilState } from "recoil";
+import { updateEventDataAtom } from "../../../state/updateEventInfo.state";
 import { writeInfoModeAtom } from "../WriteInfoMode.state";
+import { Flex } from "../../../../../../libs/ui";
+import {
+    DateInput,
+    DateInputLabel,
+    IconButton,
+    StyledInput,
+} from "../WriteInfo.style";
+import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
+import { cv } from "../../../../../../libs/ui/style";
 import dayjs from "dayjs";
-import { CreateEventButton } from "../CreateButton";
+import { UpdateEventButton } from "../UpdateButton";
 
-export function WriteTitleContainer() {
+export function WriteNoticeContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [event, setEvent] = useRecoilState(createEventDataAtom);
+    const [event] = useRecoilState(updateEventDataAtom);
     const [, setMode] = useRecoilState(writeInfoModeAtom);
 
     useEffect(() => {
-        inputRef.current?.focus();
+        if (!inputRef.current) return;
+        inputRef.current.focus();
     }, []);
-
-    const changeTitle = (e: string) => {
-        setEvent({
-            ...event,
-            title: e,
-        });
-    };
 
     return (
         <Flex.Column gap="4px">
             <StyledInput
                 placeholder="일정 명을 입력해주세요."
                 value={event.title}
-                onChange={(e) => changeTitle(e.target.value)}
-                ref={inputRef}
+                readOnly
+                onClick={() => setMode("title")}
             />
+
             <Flex.Between>
                 <Flex.Row gap="8px">
                     <IconButton onClick={() => setMode("date")}>
@@ -48,14 +48,21 @@ export function WriteTitleContainer() {
                         }`}
                     </IconButton>
                     <IconButton onClick={() => setMode("notice")}>
-                        <BellSimple size={22} weight="fill" color={cv.gray04} />
+                        <BellSimple size={22} weight="fill" color={cv.gray03} />
                     </IconButton>
                     <IconButton onClick={() => setMode("location")}>
                         <MapPin size={22} weight="fill" color={cv.gray04} />
                     </IconButton>
                 </Flex.Row>
-                <CreateEventButton />
+                <UpdateEventButton />
             </Flex.Between>
+
+            <Flex.Column gap="4px">
+                <Flex.Row gap="8px">
+                    <DateInputLabel>알림</DateInputLabel>
+                    <DateInput type="time" ref={inputRef} />
+                </Flex.Row>
+            </Flex.Column>
         </Flex.Column>
     );
 }

@@ -1,15 +1,9 @@
-import {
-    ArrowRight,
-    BellSimple,
-    Calendar,
-    MapPin,
-} from "@phosphor-icons/react";
+import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
 import { Flex } from "../../../../../../libs/ui";
 import {
     IconButton,
     LocationInput,
     ModeButton,
-    NextButton,
     StyledInput,
 } from "../WriteInfo.style";
 import { cv } from "../../../../../../libs/ui/style";
@@ -18,6 +12,7 @@ import { createEventDataAtom } from "../../../state/createEventInfo.state";
 import { useEffect, useRef } from "react";
 import { writeInfoModeAtom } from "../WriteInfoMode.state";
 import dayjs from "dayjs";
+import { CreateEventButton } from "../CreateButton";
 
 export function WriteLocationContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -93,9 +88,7 @@ export function WriteLocationContainer() {
                         <MapPin size={22} weight="fill" color={cv.gray03} />
                     </IconButton>
                 </Flex.Row>
-                <NextButton>
-                    <ArrowRight size={20} weight="bold" />
-                </NextButton>
+                <CreateEventButton />
             </Flex.Between>
         </Flex.Column>
     );

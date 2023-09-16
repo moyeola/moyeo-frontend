@@ -34,17 +34,25 @@ export interface CalendarItemProps {
     events: {
         title: string;
     }[];
+    showDayOfTheWeek?: boolean;
 }
-export function CalendarItem({ date, events, onClick }: CalendarItemProps) {
+export function CalendarItem({
+    date,
+    events,
+    onClick,
+    showDayOfTheWeek = false,
+}: CalendarItemProps) {
     const _date = dayjs(date);
     const day = _date.format("D");
     const dayOfTheWeek = dayOfTheWeekMap(_date.format("ddd"));
 
     return (
         <StyledCalendarItem onClick={() => onClick && onClick()}>
-            <StyledCalendarItemDayOfTheWeek>
-                {dayOfTheWeek}
-            </StyledCalendarItemDayOfTheWeek>
+            {showDayOfTheWeek && (
+                <StyledCalendarItemDayOfTheWeek>
+                    {dayOfTheWeek}
+                </StyledCalendarItemDayOfTheWeek>
+            )}
             <StyledCalendarItemDay>{day}</StyledCalendarItemDay>
             <StyledCalendarItemEvents>
                 {events.map((event, index) => {

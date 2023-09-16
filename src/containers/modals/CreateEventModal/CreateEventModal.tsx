@@ -1,21 +1,49 @@
 import { useRecoilState } from "recoil";
 import { createEventModalStateAtom } from "./state/createEventModal.state";
-import { SelectGroupContainer } from "./containers/SelectGroup/SelectGroup.container";
+import { SelectCalendarContainer } from "./containers/SelectCalendar/SelectCalendar.container";
 import { useEffect } from "react";
 import { WriteInfoContainer } from "./containers/WriteInfo/WriteInfo";
+import { createEventDataAtom } from "./state/createEventInfo.state";
 
-export function CreateEventModal() {
+export interface CreateEventModalProps {
+    calendarId?: number;
+    date?: string;
+}
+
+export function CreateEventModal({ calendarId, date }: CreateEventModalProps) {
     const [step, setStep] = useRecoilState(createEventModalStateAtom);
+    const [, setEvent] = useRecoilState(createEventDataAtom);
 
     useEffect(() => {
-        setStep({
-            step: "selectGroup",
-        });
-    }, [setStep]);
+        if (calendarId) {
+            setEvent((prev) => ({
+                ...prev,
+                calendarId,
+            }));
+            setStep({
+                step: "writeInfo",
+            });
+        } else {
+            setStep({
+                step: "selectGroup",
+            });
+        }
+    }, [calendarId, setEvent, setStep]);
+
+    useEffect(() => {
+        if (date) {
+            setEvent((prev) => ({
+                ...prev,
+                start: {
+                    date,
+                },
+            }));
+        }
+    }, [date, setEvent]);
 
     switch (step.step) {
         case "selectGroup":
-            return <SelectGroupContainer />;
+            return <SelectCalendarContainer />;
         case "writeInfo":
             return <WriteInfoContainer />;
         default:

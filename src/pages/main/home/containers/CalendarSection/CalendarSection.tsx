@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { CalendarInline, Section, useModal } from "../../../../../libs/ui";
-import { CalendarItemModal } from "../../../../../containers/modals/CalendarItemModal/CalendarItemModal";
+import { Section } from "../../../../../libs/ui";
+import { AllWeekCalendar } from "../../../../../containers/AllWeekCalendar/AllWeekCalendar";
 
 export function CalendarSection() {
     const navigate = useNavigate();
-    const modal = useModal();
 
     return (
         <Section>
@@ -15,73 +14,7 @@ export function CalendarSection() {
                     onClick: () => navigate("/main/calendar"),
                 }}
             />
-            <CalendarInline>
-                <CalendarInline.Item
-                    date="2023-09-05"
-                    events={[
-                        {
-                            title: "테스트 이벤트",
-                        },
-                        {
-                            title: "테스트 이벤트",
-                        },
-                    ]}
-                    onClick={() =>
-                        modal.open(
-                            <CalendarItemModal nextAction="moveCalendar" />
-                        )
-                    }
-                />
-                <CalendarInline.Item
-                    date="2023-09-05"
-                    events={[
-                        {
-                            title: "테스트 이벤트",
-                        },
-                        {
-                            title: "테스트 이벤트",
-                        },
-                    ]}
-                    onClick={() =>
-                        modal.open(
-                            <CalendarItemModal nextAction="createEvent" />
-                        )
-                    }
-                />
-                <CalendarInline.Item
-                    date="2023-09-05"
-                    events={[
-                        {
-                            title: "테스트 이벤트",
-                        },
-                        {
-                            title: "테스트 이벤트",
-                        },
-                    ]}
-                />
-                <CalendarInline.Item
-                    date="2023-09-05"
-                    events={[
-                        {
-                            title: "테스트 이벤트",
-                        },
-                        {
-                            title: "테스트 이벤트",
-                        },
-                    ]}
-                />
-                <CalendarInline.Item
-                    date="2023-09-05"
-                    events={[
-                        {
-                            title: "테스트 이벤트",
-                        },
-                        {
-                            title: "테스트 이벤트",
-                        },
-                    ]}
-                />
-            </CalendarInline>
+            <AllWeekCalendar />
         </Section>
     );
 }

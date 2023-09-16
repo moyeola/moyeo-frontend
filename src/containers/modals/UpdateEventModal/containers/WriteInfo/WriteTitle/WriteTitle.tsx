@@ -3,15 +3,15 @@ import { Flex } from "../../../../../../libs/ui";
 import { IconButton, StyledInput } from "../WriteInfo.style";
 import { cv } from "../../../../../../libs/ui/style";
 import { useRecoilState } from "recoil";
-import { createEventDataAtom } from "../../../state/createEventInfo.state";
+import { updateEventDataAtom } from "../../../state/updateEventInfo.state";
 import { useEffect, useRef } from "react";
 import { writeInfoModeAtom } from "../WriteInfoMode.state";
 import dayjs from "dayjs";
-import { CreateEventButton } from "../CreateButton";
+import { UpdateEventButton } from "../UpdateButton";
 
 export function WriteTitleContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [event, setEvent] = useRecoilState(createEventDataAtom);
+    const [event, setEvent] = useRecoilState(updateEventDataAtom);
     const [, setMode] = useRecoilState(writeInfoModeAtom);
 
     useEffect(() => {
@@ -54,7 +54,7 @@ export function WriteTitleContainer() {
                         <MapPin size={22} weight="fill" color={cv.gray04} />
                     </IconButton>
                 </Flex.Row>
-                <CreateEventButton />
+                <UpdateEventButton />
             </Flex.Between>
         </Flex.Column>
     );

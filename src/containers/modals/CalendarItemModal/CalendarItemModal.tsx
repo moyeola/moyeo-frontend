@@ -3,6 +3,9 @@ import { Button, Flex, Modal, useModal } from "../../../libs/ui";
 import { cv } from "../../../libs/ui/style";
 import { CreateEventModal } from "../CreateEventModal/CreateEventModal";
 import { useNavigate } from "react-router-dom";
+import { CalendarDto, CalendarEventDto } from "moyeo-object";
+import dayjs from "dayjs";
+import { UpdateEventModal } from "../UpdateEventModal/UpdateEventModal";
 
 const StyledItem = styled.div`
     background-color: ${cv.bgHome};
@@ -10,11 +13,12 @@ const StyledItem = styled.div`
     border-radius: 12px;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
-    height: 52px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px;
+    cursor: pointer;
 `;
 
 const ItemTitle = styled.div`
@@ -23,7 +27,7 @@ const ItemTitle = styled.div`
 `;
 
 const ItemSubtitle = styled.div`
-    font-size: 8px;
+    font-size: 12px;
 `;
 
 const Badge = styled.div`
@@ -37,11 +41,12 @@ interface ItemProps {
     title: React.ReactNode;
     subtitle?: React.ReactNode;
     isOnline?: boolean;
+    onClick?: () => void;
 }
-function Item({ title, subtitle, isOnline = false }: ItemProps) {
+function Item({ title, subtitle, isOnline = false, onClick }: ItemProps) {
     return (
-        <StyledItem>
-            <Flex.Column>
+        <StyledItem onClick={() => onClick && onClick()}>
+            <Flex.Column gap="4px">
                 <ItemTitle>{title}</ItemTitle>
                 {subtitle && <ItemSubtitle>{subtitle}</ItemSubtitle>}
             </Flex.Column>
@@ -52,9 +57,17 @@ function Item({ title, subtitle, isOnline = false }: ItemProps) {
 
 export interface CalendarItemModalProps {
     nextAction?: "moveCalendar" | "createEvent";
+    events: (CalendarEventDto & {
+        calendar?: CalendarDto;
+    })[];
+    date: string;
+    fromCalendarId?: number;
 }
 export function CalendarItemModal({
     nextAction = "moveCalendar",
+    date,
+    events,
+    fromCalendarId,
 }: CalendarItemModalProps) {
     const modal = useModal();
     const navigate = useNavigate();
@@ -66,34 +79,46 @@ export function CalendarItemModal({
 
     return (
         <Modal>
-            <Modal.Header>7월 25일 화요일</Modal.Header>
+            <Modal.Header>{dayjs(date).format("MM월 DD일 일정")}</Modal.Header>
             <Modal.Body>
                 <Flex.Column gap="6px">
-                    <Item
-                        title="프로젝트 회의"
-                        subtitle="오후 2시 - 오후 4시"
-                    />
-                    <Item
-                        title="프로젝트 회의"
-                        subtitle="오후 2시 - 오후 4시"
-                    />
-                    <Item
-                        title="프로젝트 회의"
-                        subtitle="오후 2시 - 오후 4시"
-                    />
-                    <Item
-                        title="프로젝트 회의"
-                        subtitle="오후 2시 - 오후 4시"
-                    />
+                    {events.map((event) => (
+                        <Item
+                            key={event.id}
+                            title={event.title}
+                            subtitle={`${event.calendar?.name}ㆍ${
+                                event.start.dateTime
+                                    ? `${dayjs(event.start?.dateTime).format(
+                                          "A hh:mm"
+                                      )} - ${dayjs(
+                                          event?.end?.dateTime ||
+                                              event.start?.dateTime
+                                      ).format("A hh:mm")}`
+                                    : `종일`
+                            } ${event.location ? `ㆍ${event.location}` : ""}`}
+                            isOnline={event.isOnline}
+                            onClick={() =>
+                                modal.open(<UpdateEventModal event={event} />, {
+                                    direction: "bottom",
+                                })
+                            }
+                        />
+                    ))}
                 </Flex.Column>
                 <br />
                 {nextAction === "createEvent" && (
                     <Button
                         variant="secondary"
                         onClick={() =>
-                            modal.open(<CreateEventModal />, {
-                                direction: "bottom",
-                            })
+                            modal.open(
+                                <CreateEventModal
+                                    calendarId={fromCalendarId}
+                                    date={date}
+                                />,
+                                {
+                                    direction: "bottom",
+                                }
+                            )
                         }
                     >
                         + 일정 추가
