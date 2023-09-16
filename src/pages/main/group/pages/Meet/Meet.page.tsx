@@ -8,6 +8,7 @@ import {
     IconButton,
     Layout,
     Section,
+    useModal,
 } from "../../../../../libs/ui";
 import { CaretLeft } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +17,10 @@ import { TabNav } from "../../../../../libs/ui/components/TabNav/TabNav";
 import { cv } from "../../../../../libs/ui/style";
 import { useQuery } from "react-query";
 import { client } from "../../../../../libs/api";
+import { CreateMeetModal } from "../../../../../containers/modals/CreateMeetModal/CreateMeetModal";
 
 export function GroupMeetPage() {
+    const modal = useModal();
     const navigate = useNavigate();
     const [meetStatus, setMeetStatus] = useState<"inProgress" | "finished">(
         "inProgress"
@@ -74,6 +77,7 @@ export function GroupMeetPage() {
                     <Section.Header title="진행 중인 일정 조율" />
                     {data?.map((meet) => (
                         <Entity
+                            key={meet.id}
                             banner={{
                                 type: "icon",
                                 icon: "calendar",
@@ -85,7 +89,9 @@ export function GroupMeetPage() {
                                     `/main/groups/${group?.id}/meets/${meet.id}`
                                 )
                             }
-                            subtitle={meet.responses.length + "명 참여 중"}
+                            subtitle={
+                                meet?.responses?.length || 0 + "명 참여 중"
+                            }
                         />
                     ))}
                     {data && data.length === 0 && (
@@ -96,7 +102,19 @@ export function GroupMeetPage() {
                 </Section>
             </Layout>
             <BottomLayout>
-                <Button type="button">일정 조율 생성하기</Button>
+                <Button
+                    type="button"
+                    onClick={() =>
+                        modal.open(
+                            <CreateMeetModal groupId={group?.id || -1} />,
+                            {
+                                direction: "bottom",
+                            }
+                        )
+                    }
+                >
+                    일정 조율 생성하기
+                </Button>
             </BottomLayout>
         </>
     );

@@ -4,9 +4,10 @@ import { RootRouter } from "./pages/router";
 import { MoyeoUiWrapper } from "./libs/ui";
 import { BrowserRouter } from "react-router-dom";
 import { Flip, ToastContainer } from "react-toastify";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import "react-toastify/dist/ReactToastify.css";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import "react-day-picker/dist/style.css";
 
 const queryClient = new QueryClient({
     defaultOptions: {

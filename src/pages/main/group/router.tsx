@@ -12,7 +12,7 @@ export function GroupRouter() {
             <Route path="/create" element={<CreateGroupPage />} />
             <Route path="/:groupId" element={<GroupPage />} />
             <Route path="/:groupId/edit" element={<EditGroupPage />} />
-            <Route path="/:groupId/meet" element={<GroupMeetPage />} />
+            <Route path="/:groupId/meets" element={<GroupMeetPage />} />
         </Routes>
     );
 }

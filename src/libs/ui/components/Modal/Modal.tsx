@@ -4,6 +4,8 @@ import {
     ModalBody,
     ModalFooter,
     ModalHeader,
+    ModalInput,
+    ModalCircleButton,
 } from "./Modal.style";
 
 export type ModalProps = React.ComponentPropsWithRef<"div"> & {
@@ -29,4 +31,6 @@ export const Modal = Object.assign(ModalContainer, {
     Header: ModalHeader,
     Body: ModalBody,
     Footer: ModalFooter,
+    Input: ModalInput,
+    CircleButton: ModalCircleButton,
 });

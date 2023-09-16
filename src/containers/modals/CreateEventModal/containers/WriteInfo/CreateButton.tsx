@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { cv } from "../../../../../libs/ui/style";
 import { useCreateEvent } from "./useCreateEvent";
 import { Plus } from "@phosphor-icons/react";

@@ -136,7 +136,7 @@ function GroupToolSection() {
                 <GroupToolItem
                     name="일정 조율"
                     icon={CalendarIcon}
-                    to="./meet"
+                    to="./meets"
                 />
                 <DummyGroupToolItem />
             </Flex.Row>
