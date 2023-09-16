@@ -35,6 +35,8 @@ import {
     PostGroupMembers,
     PatchGroupMember,
     DeleteGroupMember,
+    GetUserMeNotifications,
+    DeleteUserMeNotification,
 } from "moyeo-object";
 
 export class MoyeoClient extends EndpointClient {
@@ -43,6 +45,10 @@ export class MoyeoClient extends EndpointClient {
             get: this.endpointBuilder(GetUserMe),
             patch: this.endpointBuilder(PatchUserMe),
             delete: this.endpointBuilder(DeleteUserMe),
+            notifications: {
+                get: this.endpointBuilder(GetUserMeNotifications),
+                delete: this.endpointBuilder(DeleteUserMeNotification),
+            },
         },
     };
 

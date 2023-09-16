@@ -3,6 +3,7 @@ import { HomePage } from "./home/page";
 import { Redirect } from "../../components";
 import { GroupRouter } from "./group/router";
 import { CalendarRouter } from "./calendar/router";
+import { NotificationRouter } from "./notification/router";
 
 export function MainRouter() {
     return (
@@ -11,6 +12,7 @@ export function MainRouter() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/groups/*" element={<GroupRouter />} />
             <Route path="/calendar/*" element={<CalendarRouter />} />
+            <Route path="/notification/*" element={<NotificationRouter />} />
         </Routes>
     );
 }
