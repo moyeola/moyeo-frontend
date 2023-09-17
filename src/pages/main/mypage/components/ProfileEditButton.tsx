@@ -14,6 +14,7 @@ const ProfileEditBtnStyled = styled.button`
     color: ${cv.gray04};
     border: 1px solid ${cv.gray04};
     cursor: pointer;
+    background-color: ${cv.bgHome};
 `;
 
 const ProfileEditButton: React.FC = () => {

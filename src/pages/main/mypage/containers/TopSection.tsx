@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { ImageSelect } from "../../../auth/components/imageSelect";
 import { cv } from "../../../../libs/ui/style";
 import ProfileEditButton from "../components/ProfileEditButton";
+import { useUser } from "../../../../hooks/useUser";
+import { Image } from "../../../../libs/ui";
 
 const ProfileTop = styled.div`
     display: flex;
@@ -17,31 +18,28 @@ const NickName = styled.div`
     letter-spacing: -0.8px;
 `;
 
-const Email = styled.div`
-    font-size: 12px;
-    font-weight: 400;
-    color: ${cv.gray03};
-    letter-spacing: -0.36px;
-`;
-
 const ProfileText = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
 
-interface ProfileTopProps {
-    image: File | undefined;
-    setImage: React.Dispatch<React.SetStateAction<File | undefined>>;
-}
+interface ProfileTopProps {}
 
-const ProfileTopSection: React.FC<ProfileTopProps> = ({ image, setImage }) => {
+const ProfileTopSection: React.FC<ProfileTopProps> = () => {
+    const { user } = useUser();
+
     return (
         <ProfileTop>
-            <ImageSelect setImage={setImage} image={image} showPenIcon={false}/>
+            {/* <ImageSelect
+                setImage={setImage}
+                image={image}
+                showPenIcon={false}
+            /> */}
+            <Image src={user?.profileImageUrl} width="128px" height="128px" />
             <ProfileText>
-                <NickName>닉네임</NickName>
-                <Email>newnya@gmail.com</Email>
+                <NickName>{user?.name}</NickName>
+                {/* <Email>{user.}</Email> */}
             </ProfileText>
             <ProfileEditButton />
         </ProfileTop>
