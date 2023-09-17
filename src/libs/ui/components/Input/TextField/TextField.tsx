@@ -62,6 +62,10 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
                 setTimeout(() => {
                     const target = e.target as HTMLInputElement;
                     setLength(target.value.length);
+                    if (maxLength && target.value.length > maxLength) {
+                        target.value = target.value.slice(0, maxLength);
+                        setLength(maxLength);
+                    }
                 }, 0);
             };
 
