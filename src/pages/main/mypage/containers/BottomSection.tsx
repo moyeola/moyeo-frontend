@@ -21,7 +21,7 @@ const ProfileBottomTitle = styled.div`
 
 const BottomBox = styled.div`
     display: flex;
-    width: 390px;
+    width: 100%;
     padding: 0px 25px;
     flex-direction: column;
     align-items: flex-start;
@@ -33,12 +33,24 @@ const ProfileBottomSection: React.FC = () => {
         <ProfileBottomContainer>
             <BottomBox>
                 <ProfileBottomTitle>계정관리</ProfileBottomTitle>
-                <ItemBox text="로그아웃" showArrow={false} navigationPath="/intro" />
-                <ItemBox text="계정탈퇴" showArrow={true} navigationPath="delete" />
+                <ItemBox
+                    text="로그아웃"
+                    showArrow={false}
+                    navigationPath="/intro"
+                />
+                <ItemBox
+                    text="계정탈퇴"
+                    showArrow={true}
+                    navigationPath="delete"
+                />
             </BottomBox>
             <BottomBox>
                 <ProfileBottomTitle>서비스 정보</ProfileBottomTitle>
-                <ItemBox text="이용약관" showArrow={true} navigationPath="TermsofService" />
+                <ItemBox
+                    text="이용약관"
+                    showArrow={true}
+                    navigationPath="TermsofService"
+                />
             </BottomBox>
         </ProfileBottomContainer>
     );
