@@ -59,7 +59,10 @@ export type ImageSelectProps = {
     showPenIcon?: boolean; // New prop
 };
 
-export function ImageSelect({ setImage, image, showPenIcon = true }: ImageSelectProps) {
+export function ImageSelect({
+    setImage,
+    showPenIcon = true,
+}: ImageSelectProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const [previewImage, setPreviewImage] = useState<string>();
 
@@ -92,5 +95,5 @@ export function ImageSelect({ setImage, image, showPenIcon = true }: ImageSelect
                 </PenIconDiv>
             )}
         </Div>
-    );   
+    );
 }
