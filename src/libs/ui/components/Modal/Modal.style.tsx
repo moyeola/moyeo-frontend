@@ -84,8 +84,9 @@ export const ModalButton = styled.button`
     align-items: center;
     background-color: ${cv.gray07};
     transition: 150ms;
+    cursor: pointer;
 
-    &:active {
+    &:hover {
         background-color: ${cv.gray06};
     }
 `;

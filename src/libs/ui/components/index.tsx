@@ -18,7 +18,7 @@ export * from "./IconButton";
 export * from "./Spinner";
 export * from "./Calendars";
 export * from "./Skeleton";
-export * from "./RedButton";
+export * from "./SmallButton";
 export * from "./TabNav";
 export * from "./MeetPicker";
 export * from "./MeetResult";

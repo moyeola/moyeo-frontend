@@ -12,6 +12,7 @@ import {
     MeetResult,
     ProfileItem,
     Section,
+    SmallButton,
     useModal,
 } from "../../../libs/ui";
 import { CaretLeft, PencilSimple } from "@phosphor-icons/react";
@@ -19,6 +20,10 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import { dayOfTheWeekMap } from "../../../libs/ui/utils/dayOfTheWeekMap";
 import { EditMeetModal } from "../../../containers/modals/EditMeetModal/EditMeetModal";
+import { useUser } from "../../../hooks/useUser";
+import { useGroup } from "../../../hooks/useGroup";
+import { CreateEventModal } from "../../../containers/modals/CreateEventModal/CreateEventModal";
+import { toast } from "react-toastify";
 
 export function MeetResponsePage() {
     const modal = useModal();
@@ -29,12 +34,35 @@ export function MeetResponsePage() {
         end: string;
     }>();
 
+    const { user } = useUser();
+
     const { data: meet } = useQuery(["meet", meetId], async () => {
         const res = await client.meets.get({
             meetId: `${meetId}`,
         });
         return res.meet;
     });
+
+    const { group } = useGroup(
+        (meet?.creator.type === "member" && meet.creator.member?.group?.id) ||
+            -1
+    );
+
+    const { data: calendars } = useQuery(
+        ["group", group?.id || -1, "calendars"],
+        async () => {
+            const res = await client.calendars.search({
+                ownerType: "group",
+                ownerId: group?.id || -1,
+            });
+            return res.calendars;
+        }
+    );
+
+    const isCreator =
+        meet?.creator.type === "member" &&
+        meet.creator.member?.user?.id === user?.id &&
+        true;
 
     return (
         <>
@@ -56,12 +84,7 @@ export function MeetResponsePage() {
                 <Header.Title>{meet?.title}</Header.Title>
                 <Header.Right>
                     <IconButton
-                        onClick={() =>
-                            meet &&
-                            modal.open(<EditMeetModal meet={meet} />, {
-                                direction: "bottom",
-                            })
-                        }
+                        onClick={() => navigate(`/main/meets/${meetId}/edit`)}
                     >
                         <PencilSimple />
                     </IconButton>
@@ -130,19 +153,88 @@ export function MeetResponsePage() {
                     <Section>
                         <Section.Header
                             title="미참여 팀원들"
-                            description="참여를 독려하기 위해 독촉하기를 해보세요"
+                            // description="참여를 독려하기 위해 독촉하기를 해보세요"
                         />
+                        <HorizontalScroll>
+                            {group?.members
+                                .filter(
+                                    (member) =>
+                                        !meet?.responses.some(
+                                            (response) =>
+                                                response.responser.type ===
+                                                    "member" &&
+                                                response.responser.member
+                                                    ?.id === member?.id
+                                        )
+                                )
+                                .map((member) => {
+                                    return (
+                                        <ProfileItem
+                                            imageUrl={
+                                                member?.user?.profileImageUrl ||
+                                                ""
+                                            }
+                                            name={
+                                                member?.nickname ||
+                                                member?.user?.name
+                                            }
+                                        />
+                                    );
+                                })}
+                        </HorizontalScroll>
                     </Section>
+
+                    {isCreator && (
+                        <Section>
+                            <Section.Header title="일정 조율 " />
+                            <SmallButton
+                                variant="secondary"
+                                onClick={() =>
+                                    meet &&
+                                    modal.open(<EditMeetModal meet={meet} />, {
+                                        direction: "bottom",
+                                    })
+                                }
+                            >
+                                일정조율 수정
+                            </SmallButton>
+                        </Section>
+                    )}
                 </Flex.Column>
             </Layout>
             <BottomLayout>
-                <Button>
-                    {dayjs(time?.start).format(
-                        `M.D(${dayOfTheWeekMap(
-                            dayjs(time?.start).format("ddd")
-                        )}) HH:mm`
-                    )}{" "}
-                    일정 생성
+                <Button
+                    disabled={!time}
+                    onClick={() =>
+                        modal.open(
+                            <CreateEventModal
+                                calendarId={calendars?.[0]?.id}
+                                defaultValue={{
+                                    date: time?.start,
+                                    title: meet?.title,
+                                }}
+                                callback={() =>
+                                    toast.info("일정이 생성되었어요")
+                                }
+                            />,
+                            {
+                                direction: "bottom",
+                            }
+                        )
+                    }
+                >
+                    {time ? (
+                        <>
+                            {dayjs(time?.start).format(
+                                `M.D(${dayOfTheWeekMap(
+                                    dayjs(time?.start).format("ddd")
+                                )}) HH:mm`
+                            )}{" "}
+                            일정 생성
+                        </>
+                    ) : (
+                        <>시간을 선택해주세요</>
+                    )}
                 </Button>
             </BottomLayout>
         </>

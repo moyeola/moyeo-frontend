@@ -7,10 +7,18 @@ import { createEventDataAtom } from "./state/createEventInfo.state";
 
 export interface CreateEventModalProps {
     calendarId?: number;
-    date?: string;
+    defaultValue?: {
+        title?: string;
+        date?: string;
+    };
+    callback?: () => void;
 }
 
-export function CreateEventModal({ calendarId, date }: CreateEventModalProps) {
+export function CreateEventModal({
+    calendarId,
+    defaultValue,
+    callback,
+}: CreateEventModalProps) {
     const [step, setStep] = useRecoilState(createEventModalStateAtom);
     const [, setEvent] = useRecoilState(createEventDataAtom);
 
@@ -31,15 +39,23 @@ export function CreateEventModal({ calendarId, date }: CreateEventModalProps) {
     }, [calendarId, setEvent, setStep]);
 
     useEffect(() => {
-        if (date) {
+        if (defaultValue) {
             setEvent((prev) => ({
                 ...prev,
                 start: {
-                    date,
+                    date: defaultValue.date,
                 },
+                title: defaultValue.title,
             }));
         }
-    }, [date, setEvent]);
+
+        if (callback) {
+            setEvent((prev) => ({
+                ...prev,
+                callback,
+            }));
+        }
+    }, [setEvent, defaultValue, callback]);
 
     switch (step.step) {
         case "selectGroup":

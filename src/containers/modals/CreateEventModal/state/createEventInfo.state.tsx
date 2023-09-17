@@ -15,6 +15,7 @@ type CreateEventData = {
         date?: string;
         dateTime?: string;
     };
+    callback?: () => void;
 };
 
 export const createEventDataAtom = atom<CreateEventData>({

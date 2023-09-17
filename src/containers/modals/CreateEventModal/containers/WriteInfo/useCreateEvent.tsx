@@ -30,6 +30,7 @@ export function useCreateEvent() {
                 ]);
                 resetEventAtom();
                 modal.closeAll();
+                event.callback?.();
             },
             onError: (err) => {
                 toast.error("일정 생성에 실패했어요");

@@ -36,7 +36,7 @@ function ConfirmEditMeetModal({ onClick }: { onClick: () => void }) {
 
 export function useCreateMeet() {
     const modal = useModal();
-    const { dates, description, endTimeAt, id, groupId, name, startTimeAt } =
+    const { dates, description, endTimeAt, id, name, startTimeAt } =
         useRecoilValue(editMeetModalData);
     const queryClient = useQueryClient();
 

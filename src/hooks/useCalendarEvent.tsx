@@ -27,7 +27,9 @@ export function useCalendarEvent(
         }
     );
 
-    const start = dayjs(optionStart).startOf("week") || dayjs().startOf("week");
+    const start =
+        dayjs(optionStart).add(-1, "day").startOf("week") ||
+        dayjs().startOf("week");
     const end = start.add(period, "days");
 
     const { data: events, isLoading: isEventsLoading } = useQuery(

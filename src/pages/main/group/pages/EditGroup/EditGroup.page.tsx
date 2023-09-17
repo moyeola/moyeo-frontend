@@ -4,7 +4,7 @@ import {
     Header,
     IconButton,
     Layout,
-    RedButton,
+    SmallButton,
     Section,
     Spinner,
     Switch,
@@ -107,7 +107,7 @@ export function EditGroupPage() {
                     </Section>
                     <Flex.Between>
                         <div />
-                        <RedButton
+                        <SmallButton
                             onClick={() =>
                                 modal.open(
                                     <DeleteGroupModal
@@ -115,9 +115,10 @@ export function EditGroupPage() {
                                     />
                                 )
                             }
+                            variant="red"
                         >
                             그룹 삭제
-                        </RedButton>
+                        </SmallButton>
                     </Flex.Between>
                 </Flex.Column>
             </Layout>

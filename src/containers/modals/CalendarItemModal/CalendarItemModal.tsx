@@ -113,7 +113,9 @@ export function CalendarItemModal({
                             modal.open(
                                 <CreateEventModal
                                     calendarId={fromCalendarId}
-                                    date={date}
+                                    defaultValue={{
+                                        date,
+                                    }}
                                 />,
                                 {
                                     direction: "bottom",

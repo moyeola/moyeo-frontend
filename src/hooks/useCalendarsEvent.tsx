@@ -11,7 +11,9 @@ export type UseCalendarsEventOptions = {
 };
 export function useCalendarsEvent(options?: UseCalendarsEventOptions) {
     const { period = 28, start: optionStart, calendarFilter } = options || {};
-    const start = dayjs(optionStart).startOf("week") || dayjs().startOf("week");
+    const start =
+        dayjs(optionStart).add(-1, "day").startOf("week") ||
+        dayjs().startOf("week");
     const end = start.add(period, "days");
     const { data: calendars } = useQuery(["calendars"], async () => {
         const res = await client.calendars.list({});
