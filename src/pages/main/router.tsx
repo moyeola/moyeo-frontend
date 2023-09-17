@@ -5,7 +5,7 @@ import { GroupRouter } from "./group/router";
 import { CalendarRouter } from "./calendar/router";
 import { NotificationRouter } from "./notification/router";
 import { MeetRouter } from "./meet/router";
-import { MyPage } from "./mypage/Mypage";
+import { MyPageRouter } from "./mypage/router";
 
 export function MainRouter() {
     return (
@@ -16,7 +16,7 @@ export function MainRouter() {
             <Route path="/calendar/*" element={<CalendarRouter />} />
             <Route path="/notification/*" element={<NotificationRouter />} />
             <Route path="/meets/*" element={<MeetRouter />} />
-            <Route path="/mypage/*" element={<MyPage/>} />
+            <Route path="/mypage/*" element={<MyPageRouter/>} />
         </Routes>
     );
 }
