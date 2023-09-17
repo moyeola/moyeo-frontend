@@ -34,7 +34,7 @@ const ProfileBottomSection: React.FC = () => {
             <BottomBox>
                 <ProfileBottomTitle>계정관리</ProfileBottomTitle>
                 <ItemBox text="로그아웃" showArrow={false} navigationPath="/logout-path" />
-                <ItemBox text="계정탈퇴" showArrow={true} navigationPath="/delete-account-path" />
+                <ItemBox text="계정탈퇴" showArrow={true} navigationPath="/main/mypage/delete" />
             </BottomBox>
             <BottomBox>
                 <ProfileBottomTitle>서비스 정보</ProfileBottomTitle>

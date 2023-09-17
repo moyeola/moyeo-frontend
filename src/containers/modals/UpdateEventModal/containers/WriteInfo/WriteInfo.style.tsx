@@ -13,7 +13,7 @@ export const StyledInput = styled.input`
 `;
 
 export const IconButton = styled.button`
-    min-width: 32px;
+    min-width: 32px; 
     height: 32px;
     padding: 4px;
     border: 0px;

@@ -54,7 +54,7 @@ export function ProfileEdit() {
                 <ImageSelect setImage={setImage} image={image} />
                 <TextField
                     label="닉네임"
-                    placeholder="변경할 닉네임을 입력해주세요"
+                    placeholder="변경할닉네임을 입력해주세요"
                     maxLength={10}
                     {...register("nickname", {
                         required: "필수 항목이에요",
