@@ -20,6 +20,7 @@
         "endpoint-client": "^0.1.1",
         "moyeo-object": "^0.6.17",
         "phosphor": "^0.7.1",
+        "phosphor-react": "^1.4.1",
         "react": "^18.2.0",
         "react-calendar": "^4.6.0",
         "react-day-picker": "^8.8.2",
@@ -31,7 +32,7 @@
         "react-toastify": "^9.1.3",
         "react-toggle": "^4.1.3",
         "recoil": "^0.7.7",
-        "styled-components": "^6.0.7"
+        "styled-components": "^6.0.8"
     },
     "devDependencies": {
         "@storybook/addon-essentials": "^7.3.2",

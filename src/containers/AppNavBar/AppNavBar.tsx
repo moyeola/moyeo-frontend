@@ -32,7 +32,7 @@ export function AppNavBar({ selected }: AppNavBarProps) {
                 icon={<User />}
                 label="마이페이지"
                 selected={selected === "myPage"}
-                onClick={() => navigate("/main/my-page")}
+                onClick={() => navigate("/main/mypage")}
             />
         </NavBar>
     );
