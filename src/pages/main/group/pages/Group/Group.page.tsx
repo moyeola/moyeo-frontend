@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LinkSimple } from "@phosphor-icons/react";
 import { GroupCalendar } from "../../../../../containers/GroupCalendar/GroupCalendar";
+import { useQuery } from "react-query";
+import { client } from "../../../../../libs/api";
 
 function GroupCalendarSection() {
     const { group } = useGroup();
@@ -107,11 +109,26 @@ function InviteGroupModal({ url }: { url: string }) {
 
 function GroupToolSection() {
     const modal = useModal();
+    const { group } = useGroup();
+    const { data: inviteCode } = useQuery(
+        ["group", group?.id, "inviteCode"],
+        async () => {
+            const res = await client.groups.getInviteCode({
+                groupId: `${group?.id}`,
+            });
+            return res.inviteCode;
+        },
+        {
+            enabled: !!group?.id,
+        }
+    );
 
     const shareGroup = async () => {
         if (window.navigator.share === undefined) {
             modal.open(
-                <InviteGroupModal url="https://moyeo.la/invite/xxxxxx" />
+                <InviteGroupModal
+                    url={`https://moyeo.la/invite/${inviteCode}`}
+                />
             );
 
             return;
@@ -119,8 +136,8 @@ function GroupToolSection() {
 
         await window.navigator.share({
             title: document.title,
-            text: "Hello World",
-            url: "https://developer.mozilla.org",
+            text: "Moyeo.la 팀 초대 링크",
+            url: `https://moyeo.la/invite/${inviteCode}`,
         });
     };
 

@@ -16,7 +16,7 @@ export function MainRouter() {
             <Route path="/calendar/*" element={<CalendarRouter />} />
             <Route path="/notification/*" element={<NotificationRouter />} />
             <Route path="/meets/*" element={<MeetRouter />} />
-            <Route path="/mypage/*" element={<MyPageRouter/>} />
+            <Route path="/mypage/*" element={<MyPageRouter />} />
         </Routes>
     );
 }

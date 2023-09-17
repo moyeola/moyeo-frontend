@@ -19,7 +19,7 @@ export interface MemberItemProps {
     member: MemberDto;
 }
 export function MemberItem({ member }: MemberItemProps) {
-    const { group } = useGroup();
+    const { group, memberMe } = useGroup();
     const modal = useModal();
 
     return (
@@ -32,7 +32,7 @@ export function MemberItem({ member }: MemberItemProps) {
                 {member.role === "OWNER" && (
                     <CrownSimple weight="fill" size={20} color={cv.primary} />
                 )}
-                {member.role === "MEMBER" && (
+                {memberMe?.role === "OWNER" && member.role !== "OWNER" && (
                     <IconButton
                         type="button"
                         onClick={() =>

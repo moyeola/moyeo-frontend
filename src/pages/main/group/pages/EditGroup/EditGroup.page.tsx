@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { client } from "../../../../../libs/api";
 import { DeleteGroupModal } from "./containers/DeleteGroupModal";
+import { ExitGroupModal } from "./containers/ExitGroupModal";
 
 interface Form {
     active: boolean;
@@ -29,7 +30,7 @@ interface Form {
 
 export function EditGroupPage() {
     const modal = useModal();
-    const { group } = useGroup();
+    const { group, memberMe } = useGroup();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
     const { setValue, register, handleSubmit } = useForm<Form>();
@@ -99,7 +100,7 @@ export function EditGroupPage() {
                     </Section>
                     <Section>
                         <Section.Header title="멤버 관리" />
-                        <Flex.Column>
+                        <Flex.Column gap="12px">
                             {group?.members.map((member) => (
                                 <MemberItem key={member.id} member={member} />
                             ))}
@@ -107,18 +108,33 @@ export function EditGroupPage() {
                     </Section>
                     <Flex.Between>
                         <div />
-                        <SmallButton
-                            onClick={() =>
-                                modal.open(
-                                    <DeleteGroupModal
-                                        groupId={group?.id || -1}
-                                    />
-                                )
-                            }
-                            variant="red"
-                        >
-                            그룹 삭제
-                        </SmallButton>
+                        {memberMe?.role === "OWNER" ? (
+                            <SmallButton
+                                onClick={() =>
+                                    modal.open(
+                                        <DeleteGroupModal
+                                            groupId={group?.id || -1}
+                                        />
+                                    )
+                                }
+                                variant="red"
+                            >
+                                그룹 삭제
+                            </SmallButton>
+                        ) : (
+                            <SmallButton
+                                onClick={() =>
+                                    modal.open(
+                                        <ExitGroupModal
+                                            groupId={group?.id || -1}
+                                        />
+                                    )
+                                }
+                                variant="red"
+                            >
+                                그룹 탈퇴
+                            </SmallButton>
+                        )}
                     </Flex.Between>
                 </Flex.Column>
             </Layout>

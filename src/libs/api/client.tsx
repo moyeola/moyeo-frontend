@@ -37,6 +37,8 @@ import {
     DeleteGroupMember,
     GetUserMeNotifications,
     DeleteUserMeNotification,
+    GetGroupInviteCode,
+    PostGroupInvite,
 } from "moyeo-object";
 
 export class MoyeoClient extends EndpointClient {
@@ -58,6 +60,8 @@ export class MoyeoClient extends EndpointClient {
         patch: this.endpointBuilder(PatchGroup),
         delete: this.endpointBuilder(DeleteGroup),
         search: this.endpointBuilder(GetGroupsSearch),
+        getInviteCode: this.endpointBuilder(GetGroupInviteCode),
+        invite: this.endpointBuilder(PostGroupInvite),
         members: {
             get: this.endpointBuilder(GetGroupMember),
             list: this.endpointBuilder(GetGroupMembers),
