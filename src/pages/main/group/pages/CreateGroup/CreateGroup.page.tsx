@@ -50,7 +50,7 @@ export function CreateGroupPage() {
         <form onSubmit={handleSubmit(createGroup)}>
             <Header bgColor={cv.bgOnboarding}>
                 <Header.Left>
-                    <IconButton onClick={() => navigate(-1)}>
+                    <IconButton type="button" onClick={() => navigate(-1)}>
                         <CaretLeft />
                     </IconButton>
                 </Header.Left>

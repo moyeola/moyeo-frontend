@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { cv } from "../../../../libs/ui/style";
 import { useNavigate } from "react-router-dom";
-import { CaretRight } from "phosphor-react";
+import { CaretRight } from "@phosphor-icons/react";
 
 const ItemText = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ const ItemBoxContainer = styled.div`
     justify-content: center;
     gap: 10px;
     width: 100%;
-    cursor: pointer; 
+    cursor: pointer;
 `;
 
 const ArrowIcon = styled(CaretRight)`
@@ -36,11 +36,17 @@ interface ItemBoxProps {
     showArrow?: boolean;
 }
 
-const ItemBox: React.FC<ItemBoxProps> = ({ text, navigationPath, showArrow }) => {
+const ItemBox: React.FC<ItemBoxProps> = ({
+    text,
+    navigationPath,
+    showArrow,
+}) => {
     const navigate = useNavigate();
 
     return (
-        <ItemBoxContainer onClick={() => navigationPath && navigate(navigationPath)}>
+        <ItemBoxContainer
+            onClick={() => navigationPath && navigate(navigationPath)}
+        >
             <ItemText>{text}</ItemText>
             {showArrow && <ArrowIcon size={28} weight="light" />}
         </ItemBoxContainer>
