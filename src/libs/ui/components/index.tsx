@@ -22,3 +22,5 @@ export * from "./RedButton";
 export * from "./TabNav";
 export * from "./MeetPicker";
 export * from "./MeetResult";
+export * from "./ProfileItem";
+export * from "./HorizontalScroll";
