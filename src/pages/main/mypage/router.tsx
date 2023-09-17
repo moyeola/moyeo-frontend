@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { MyPage } from "./Mypage";
 import { ProfileEdit } from "./pages/ProfileEdit.page";
 import { Deletion } from "./pages/AccountDeletion.page";
-import {TermsofService} from "./pages/TermsofService.page";
+import { TermsofService } from "./pages/TermsofService.page";
 
 
 export function MyPageRouter() {

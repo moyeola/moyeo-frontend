@@ -19,7 +19,7 @@ const ProfileEditBtnStyled = styled.button`
 const ProfileEditButton: React.FC = () => {
     const navigate = useNavigate();
     return (
-        <ProfileEditBtnStyled onClick={() => navigate("/main/mypage/edit")}>
+        <ProfileEditBtnStyled onClick={() => navigate("edit")}>
             프로필 편집
         </ProfileEditBtnStyled>
     );

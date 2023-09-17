@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { cv } from "../../../libs/ui/style";
 
 import PenIcon from "../assets/pen.svg";
 import ProfilePlaceholder from "../assets/profilePlaceholder.png";
@@ -41,7 +42,7 @@ const PenIconDiv = styled.div`
     justify-content: center;
 
     padding: 8px;
-    background-color: ${({ theme }) => theme.color.primary};
+    background-color: ${cv.primary};
     border-radius: 1000px;
     cursor: pointer;
 `;

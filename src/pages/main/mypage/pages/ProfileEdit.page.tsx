@@ -13,7 +13,6 @@ export function ProfileEdit() {
     const navigate = useNavigate();
     const [image, setImage] = useState<File | undefined>();
 
-    // 가정: 초기 닉네임 값 (이 값을 API나 다른 곳에서 가져와 설정할 수 있습니다)
     const defaultNickname = "개미는 뚠뚠";
 
     const { register, handleSubmit, setValue } = useForm<FormInput>({
@@ -26,8 +25,6 @@ export function ProfileEdit() {
     const saveNickname = (data: FormInput) => {
         // 여기에 API 호출 또는 다른 로직을 추가하여 닉네임을 저장합니다.
         console.log(data.nickname);  // 저장된 닉네임 확인용
-
-        navigate("/main/mypage");
     };
 
     return (
@@ -51,10 +48,10 @@ export function ProfileEdit() {
                 bgColor={cv.bgHome}
                 minHeight="100dvh"
             >
-                <ImageSelect setImage={setImage} image={image} />
+                <ImageSelect setImage={setImage} image={image}/>
                 <TextField
                     label="닉네임"
-                    placeholder="변경할닉네임을 입력해주세요"
+                    placeholder="변경할 닉네임을 입력해주세요"
                     maxLength={10}
                     {...register("nickname", {
                         required: "필수 항목이에요",
