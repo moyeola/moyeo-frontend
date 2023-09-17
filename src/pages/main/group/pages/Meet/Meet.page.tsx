@@ -22,8 +22,8 @@ import { CreateMeetModal } from "../../../../../containers/modals/CreateMeetModa
 export function GroupMeetPage() {
     const modal = useModal();
     const navigate = useNavigate();
-    const [meetStatus, setMeetStatus] = useState<"inProgress" | "finished">(
-        "inProgress"
+    const [meetStatus, setMeetStatus] = useState<"PROGRESSING" | "CONFIRMED">(
+        "PROGRESSING"
     );
     const { group } = useGroup();
 
@@ -33,6 +33,7 @@ export function GroupMeetPage() {
             const res = await client.meets.list({
                 creatorType: "group",
                 creatorId: group?.id || -1,
+                status: meetStatus,
             });
             return res.meets;
         },
@@ -44,23 +45,23 @@ export function GroupMeetPage() {
     return (
         <>
             <Header
-            // subChildren={
-            //     <TabNav
-            //         tabs={[
-            //             {
-            //                 title: "진행 중",
-            //                 value: "inProgress",
-            //                 onClick: () => setMeetStatus("inProgress"),
-            //             },
-            //             {
-            //                 title: "완료",
-            //                 value: "finished",
-            //                 onClick: () => setMeetStatus("finished"),
-            //             },
-            //         ]}
-            //         selected={meetStatus}
-            //     />
-            // }
+                subChildren={
+                    <TabNav
+                        tabs={[
+                            {
+                                title: "진행 중",
+                                value: "PROGRESSING",
+                                onClick: () => setMeetStatus("PROGRESSING"),
+                            },
+                            {
+                                title: "완료",
+                                value: "CONFIRMED",
+                                onClick: () => setMeetStatus("CONFIRMED"),
+                            },
+                        ]}
+                        selected={meetStatus}
+                    />
+                }
             >
                 <Header.Left>
                     <IconButton
@@ -72,7 +73,7 @@ export function GroupMeetPage() {
                 <Header.Title>{group?.name} 일정조율</Header.Title>
                 <Header.Right />
             </Header>
-            <Layout bgColor={cv.bgHome}>
+            <Layout bgColor={cv.bgHome} paddingTop="120px">
                 <Section>
                     <Section.Header title="일정 조율" />
                     {data?.map((meet) => (
@@ -90,11 +91,21 @@ export function GroupMeetPage() {
                             }명 참여 중`}
                         />
                     ))}
-                    {data && data.length === 0 && (
-                        <EmptyEntity>
-                            진행 중인 일정 조율이 없습니다.
-                        </EmptyEntity>
-                    )}
+                    {data &&
+                        data.length === 0 &&
+                        meetStatus === "PROGRESSING" && (
+                            <EmptyEntity>
+                                진행 중인 일정 조율이 없습니다.
+                            </EmptyEntity>
+                        )}
+
+                    {data &&
+                        data.length === 0 &&
+                        meetStatus === "CONFIRMED" && (
+                            <EmptyEntity>
+                                완료된 일정 조율이 없습니다.
+                            </EmptyEntity>
+                        )}
                 </Section>
             </Layout>
             <BottomLayout>
