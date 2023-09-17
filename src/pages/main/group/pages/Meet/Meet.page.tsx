@@ -18,6 +18,7 @@ import { cv } from "../../../../../libs/ui/style";
 import { useQuery } from "react-query";
 import { client } from "../../../../../libs/api";
 import { CreateMeetModal } from "../../../../../containers/modals/CreateMeetModal/CreateMeetModal";
+import { useUser } from "../../../../../hooks/useUser";
 
 export function GroupMeetPage() {
     const modal = useModal();
@@ -25,7 +26,11 @@ export function GroupMeetPage() {
     const [meetStatus, setMeetStatus] = useState<"PROGRESSING" | "CONFIRMED">(
         "PROGRESSING"
     );
+    const { user } = useUser();
     const { group } = useGroup();
+    const userMember = user?.members.find(
+        (member) => member?.group?.id === group?.id
+    );
 
     const { data } = useQuery(
         ["group", group?.id, "meets", meetStatus],
@@ -76,21 +81,47 @@ export function GroupMeetPage() {
             <Layout bgColor={cv.bgHome} paddingTop="120px">
                 <Section>
                     <Section.Header title="일정 조율" />
-                    {data?.map((meet) => (
-                        <Entity
-                            key={meet.id}
-                            banner={{
-                                type: "icon",
-                                icon: "calendar",
-                            }}
-                            title={meet.title}
-                            description={meet.description}
-                            onClick={() => navigate(`/main/meets/${meet.id}`)}
-                            subtitle={`${group?.members.length}명 중 ${
+                    {data?.map((meet) => {
+                        const respond = meet.responses.some(
+                            (response) =>
+                                response.responser.type === "member" &&
+                                response.responser.member?.id === userMember?.id
+                        );
+
+                        let description = "";
+                        if (!respond) {
+                            description = `일정 조율을 입력해주세요 (${
                                 meet?.responses?.length || 0
-                            }명 참여 중`}
-                        />
-                    ))}
+                            }/${group?.members.length}명)`;
+                        } else {
+                            if (
+                                meet?.responses?.length ===
+                                group?.members.length
+                            ) {
+                                description = "전원 참여 완료";
+                            } else {
+                                description = `${group?.members.length}명 중 ${
+                                    meet?.responses?.length || 0
+                                }명 참여 중`;
+                            }
+                        }
+
+                        return (
+                            <Entity
+                                key={meet.id}
+                                banner={{
+                                    type: "icon",
+                                    icon: "calendar",
+                                }}
+                                title={meet.title}
+                                onClick={() =>
+                                    navigate(`/main/meets/${meet.id}`)
+                                }
+                                description={description}
+                                inactive={respond}
+                            />
+                        );
+                    })}
                     {data &&
                         data.length === 0 &&
                         meetStatus === "PROGRESSING" && (
