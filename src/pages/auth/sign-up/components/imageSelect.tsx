@@ -55,9 +55,10 @@ const PenIconImg = styled.img`
 export type ImageSelectProps = {
     setImage: (file: File) => void;
     image?: File;
+    showPenIcon?: boolean; // New prop
 };
 
-export function ImageSelect({ setImage, image }: ImageSelectProps) {
+export function ImageSelect({ setImage, image, showPenIcon = true }: ImageSelectProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const [previewImage, setPreviewImage] = useState<string>();
 
@@ -84,9 +85,11 @@ export function ImageSelect({ setImage, image }: ImageSelectProps) {
                 src={previewImage || ProfilePlaceholder}
                 onClick={selectImage}
             />
-            <PenIconDiv>
-                <PenIconImg src={PenIcon} onClick={selectImage} />
-            </PenIconDiv>
+            {showPenIcon && (
+                <PenIconDiv>
+                    <PenIconImg src={PenIcon} onClick={selectImage} />
+                </PenIconDiv>
+            )}
         </Div>
-    );
+    );   
 }

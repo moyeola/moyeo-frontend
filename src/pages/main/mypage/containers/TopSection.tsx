@@ -38,7 +38,7 @@ interface ProfileTopProps {
 const ProfileTopSection: React.FC<ProfileTopProps> = ({ image, setImage }) => {
     return (
         <ProfileTop>
-            <ImageSelect setImage={setImage} image={image} />
+            <ImageSelect setImage={setImage} image={image} showPenIcon={false}/>
             <ProfileText>
                 <NickName>닉네임</NickName>
                 <Email>newnya@gmail.com</Email>

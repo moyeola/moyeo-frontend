@@ -4,7 +4,6 @@ import PenIcon from "../assets/pen.svg";
 import ProfilePlaceholder from "../assets/profilePlaceholder.png";
 
 import styled from "styled-components";
-import { cv } from "../../../libs/ui/style";
 
 const Div = styled.div`
     display: flex;
@@ -42,7 +41,7 @@ const PenIconDiv = styled.div`
     justify-content: center;
 
     padding: 8px;
-    background-color: ${cv.primary};
+    background-color: ${({ theme }) => theme.color.primary};
     border-radius: 1000px;
     cursor: pointer;
 `;
@@ -56,9 +55,10 @@ const PenIconImg = styled.img`
 export type ImageSelectProps = {
     setImage: (file: File) => void;
     image?: File;
+    showPenIcon?: boolean; // New prop
 };
 
-export function ImageSelect({ setImage, image }: ImageSelectProps) {
+export function ImageSelect({ setImage, image, showPenIcon = true }: ImageSelectProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const [previewImage, setPreviewImage] = useState<string>();
 
@@ -85,9 +85,11 @@ export function ImageSelect({ setImage, image }: ImageSelectProps) {
                 src={previewImage || ProfilePlaceholder}
                 onClick={selectImage}
             />
-            <PenIconDiv>
-                <PenIconImg src={PenIcon} onClick={selectImage} />
-            </PenIconDiv>
+            {showPenIcon && (
+                <PenIconDiv>
+                    <PenIconImg src={PenIcon} onClick={selectImage} />
+                </PenIconDiv>
+            )}
         </Div>
-    );
+    );   
 }
