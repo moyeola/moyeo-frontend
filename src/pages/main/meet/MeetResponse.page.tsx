@@ -6,19 +6,22 @@ import {
     Button,
     Flex,
     Header,
+    HorizontalScroll,
     IconButton,
     Layout,
     MeetResult,
+    ProfileItem,
     Section,
     useModal,
 } from "../../../libs/ui";
-import { CaretLeft } from "@phosphor-icons/react";
+import { CaretLeft, PencilSimple } from "@phosphor-icons/react";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { dayOfTheWeekMap } from "../../../libs/ui/utils/dayOfTheWeekMap";
-import { useGroup } from "../../../hooks/useGroup";
+import { EditMeetModal } from "../../../containers/modals/EditMeetModal/EditMeetModal";
 
 export function MeetResponsePage() {
+    const modal = useModal();
     const { meetId } = useParams();
     const navigate = useNavigate();
     const [time, setTime] = useState<{
@@ -51,7 +54,18 @@ export function MeetResponsePage() {
                     </IconButton>
                 </Header.Left>
                 <Header.Title>{meet?.title}</Header.Title>
-                <Header.Right></Header.Right>
+                <Header.Right>
+                    <IconButton
+                        onClick={() =>
+                            meet &&
+                            modal.open(<EditMeetModal meet={meet} />, {
+                                direction: "bottom",
+                            })
+                        }
+                    >
+                        <PencilSimple />
+                    </IconButton>
+                </Header.Right>
             </Header>
             <Layout>
                 <Flex.Column gap="32px">
@@ -76,6 +90,41 @@ export function MeetResponsePage() {
                                 )}) HH:mm`
                             )} ~ ${dayjs(time?.end).format("HH:mm")}`}
                         />
+                        <HorizontalScroll>
+                            {meet?.responses
+                                .filter((response) =>
+                                    response.times.some(
+                                        (responseTime) =>
+                                            time?.start ===
+                                                responseTime?.start &&
+                                            time?.end === responseTime?.end
+                                    )
+                                )
+                                .map((response) => {
+                                    return (
+                                        <ProfileItem
+                                            imageUrl={
+                                                response.responser.type ===
+                                                "member"
+                                                    ? response.responser.member
+                                                          ?.user
+                                                          ?.profileImageUrl ||
+                                                      ""
+                                                    : ""
+                                            }
+                                            name={
+                                                response.responser.type ===
+                                                "member"
+                                                    ? response.responser.member
+                                                          ?.nickname ||
+                                                      response.responser.member
+                                                          ?.user?.name
+                                                    : ""
+                                            }
+                                        />
+                                    );
+                                })}
+                        </HorizontalScroll>
                     </Section>
 
                     <Section>
@@ -87,7 +136,14 @@ export function MeetResponsePage() {
                 </Flex.Column>
             </Layout>
             <BottomLayout>
-                <Button>일정조율 마감</Button>
+                <Button>
+                    {dayjs(time?.start).format(
+                        `M.D(${dayOfTheWeekMap(
+                            dayjs(time?.start).format("ddd")
+                        )}) HH:mm`
+                    )}{" "}
+                    일정 생성
+                </Button>
             </BottomLayout>
         </>
     );

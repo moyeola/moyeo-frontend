@@ -11,6 +11,6 @@ export const StyledProfileItem = styled.div<{ onClick?: () => void }>`
 `;
 
 export const StyledProfileItemName = styled.div`
-    font-size: 14px;
+    font-size: 9px;
     color: ${cv.gray04};
 `;

@@ -74,3 +74,20 @@ export const ModalCircleButton = styled.button`
 `;
 
 ModalCircleButton.displayName = "Modal.CircleButton";
+
+export const ModalButton = styled.button`
+    height: 40px;
+    padding: 4px 8px;
+    border: 0px;
+    outline: 0px;
+    display: flex;
+    align-items: center;
+    background-color: ${cv.gray07};
+    transition: 150ms;
+
+    &:active {
+        background-color: ${cv.gray06};
+    }
+`;
+
+ModalButton.displayName = "Modal.Button";
