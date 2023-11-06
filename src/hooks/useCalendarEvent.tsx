@@ -15,7 +15,7 @@ export function useCalendarEvent(
     const { period = 21, start: optionStart, enabled = true } = options || {};
 
     const { data: calendar, isLoading: isCalendarLoading } = useQuery(
-        ["calendar", calendarId],
+        ["calendars", calendarId],
         async () => {
             const res = await client.calendars.get({
                 calendarId: calendarId,

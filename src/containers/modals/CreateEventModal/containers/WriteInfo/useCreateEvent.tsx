@@ -23,7 +23,9 @@ export function useCreateEvent() {
             }),
         {
             onSuccess: async () => {
-                await queryClient.invalidateQueries(["calendars"]);
+                await queryClient.invalidateQueries({
+                    queryKey: ["calendars"],
+                });
 
                 resetEventAtom();
                 modal.closeAll();
