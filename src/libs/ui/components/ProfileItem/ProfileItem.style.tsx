@@ -11,6 +11,11 @@ export const StyledProfileItem = styled.div<{ onClick?: () => void }>`
 `;
 
 export const StyledProfileItemName = styled.div`
-    font-size: 9px;
+    font-size: 10px;
+    width: 52px;
     color: ${cv.gray04};
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `;
