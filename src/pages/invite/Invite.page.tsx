@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { client } from "../../libs/api";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Layout, Spinner } from "../../libs/ui";
 import styled from "styled-components";
 import { APIResponseError } from "endpoint-client";
@@ -49,6 +49,13 @@ export function InvitePage() {
             retry: false,
         }
     );
+
+    useEffect(() => {
+        if (!localStorage.getItem("token")) {
+            navigate("/intro");
+            toast.info("먼저 로그인해주세요.");
+        }
+    }, [navigate]);
 
     return (
         <Layout>
