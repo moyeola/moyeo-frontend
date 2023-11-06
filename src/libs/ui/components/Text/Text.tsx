@@ -7,6 +7,7 @@ export interface TextProps extends React.ComponentProps<"p"> {
     warp?: "normal" | "nowrap" | "pre" | "pre-wrap";
     size?: string;
     color?: string;
+    align?: "left" | "center" | "right";
 }
 
 interface StyledTextProps {
@@ -15,6 +16,7 @@ interface StyledTextProps {
     $warp?: "normal" | "nowrap" | "pre" | "pre-wrap";
     $size?: string;
     $color?: string;
+    $align?: "left" | "center" | "right";
 }
 
 const StyledText = styled.p<StyledTextProps>`
@@ -26,10 +28,11 @@ const StyledText = styled.p<StyledTextProps>`
     font-size: ${(props) => props.$size || "16px"};
     color: ${(props) => props.$color || "inherit"};
     white-space: ${(props) => props.$warp || "normal"};
+    text-align: ${(props) => props.$align || "inherit"};
 `;
 
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(
-    ({ font, weight, warp, size, color, children, ...props }, ref) => {
+    ({ font, weight, warp, size, color, align, children, ...props }, ref) => {
         return (
             <StyledText
                 ref={ref}
@@ -38,6 +41,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
                 $warp={warp}
                 $size={size}
                 $color={color}
+                $align={align}
                 {...props}
             >
                 {children}
