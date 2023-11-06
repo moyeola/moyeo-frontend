@@ -2,22 +2,26 @@ import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { createEventDataAtom } from "../../../state/createEventInfo.state";
 import { createEventWriteInfoModeAtom } from "../WriteInfoMode.state";
-import { Flex } from "../../../../../../libs/ui";
-import {
-    DateInput,
-    DateInputLabel,
-    IconButton,
-    StyledInput,
-} from "../WriteInfo.style";
+import { Flex, Picker, PickerColumn } from "../../../../../../libs/ui";
+import { IconButton, StyledInput } from "../WriteInfo.style";
 import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
 import { cv } from "../../../../../../libs/ui/style";
 import dayjs from "dayjs";
 import { CreateEventButton } from "../CreateButton";
+import {
+    amPmOptions,
+    hourOptions,
+    minuteOptions,
+    useTimePicker,
+} from "../../../../../../hooks/useTimePicker";
 
 export function WriteNoticeContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [event] = useRecoilState(createEventDataAtom);
     const [, setMode] = useRecoilState(createEventWriteInfoModeAtom);
+
+    const [result, time, setHour, setAmPm, setMinute] = useTimePicker();
+    console.log(time);
 
     useEffect(() => {
         if (!inputRef.current) return;
@@ -58,10 +62,27 @@ export function WriteNoticeContainer() {
             </Flex.Between>
 
             <Flex.Column gap="4px">
-                <Flex.Row gap="8px">
+                {/* <Flex.Row gap="8px">
                     <DateInputLabel>알림</DateInputLabel>
                     <DateInput type="time" ref={inputRef} />
-                </Flex.Row>
+                </Flex.Row> */}
+                <Picker style={{ width: "100%" }}>
+                    <PickerColumn
+                        options={hourOptions}
+                        value={result.hour}
+                        onChange={(e) => setHour(+e.target.value)}
+                    />
+                    <PickerColumn
+                        options={minuteOptions}
+                        value={result.minute}
+                        onChange={(e) => setMinute(+e.target.value)}
+                    />
+                    <PickerColumn
+                        options={amPmOptions}
+                        value={result.amPm}
+                        onChange={(e) => setAmPm(e.target.value)}
+                    />
+                </Picker>
             </Flex.Column>
         </Flex.Column>
     );

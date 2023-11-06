@@ -12,7 +12,7 @@ export function GroupCalendar({ groupId }: GroupCalendarProps) {
     const modal = useModal();
 
     const { data: calendars } = useQuery(
-        ["group", groupId, "calendars"],
+        ["calendars", "group", groupId],
         async () => {
             const res = await client.calendars.search({
                 ownerType: "group",

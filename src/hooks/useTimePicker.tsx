@@ -20,13 +20,22 @@ export const hourOptions = [
     { label: "11", value: "11" },
 ];
 
+export const minuteOptions = Array.from({ length: 60 }, (_, i) => ({
+    label: `${i}`.padStart(2, "0"),
+    value: `${i}`.padStart(2, "0"),
+}));
+
 export const useTimePicker = (initTime: string = "00:00") => {
     const [hour, setHour] = useState(+(initTime.split(":")[0] || 1) % 12);
     const [amPm, setAmPm] = useState(
         `${+initTime?.split(":")[0] >= 12 ? "PM" : "AM"}`
     );
+    const [minute, setMinute] = useState(+(initTime.split(":")[1] || 0));
 
-    const time = `${hour + (amPm === "PM" ? 12 : 0)}:00`.padStart(5, "0");
+    const time = `${hour + (amPm === "PM" ? 12 : 0)}:${minute}`.padStart(
+        5,
+        "0"
+    );
     const text =
         hour === 0
             ? amPm === "AM"
@@ -37,11 +46,12 @@ export const useTimePicker = (initTime: string = "00:00") => {
     const result = useMemo(
         () => ({
             hour: `${hour}`.padStart(2, "0"),
+            minute: `${minute}`.padStart(2, "0"),
             amPm,
             text,
         }),
-        [amPm, hour, text]
+        [amPm, hour, minute, text]
     );
 
-    return [result, time, setHour, setAmPm] as const;
+    return [result, time, setHour, setAmPm, setMinute] as const;
 };

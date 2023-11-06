@@ -23,7 +23,6 @@ import { client } from "../../../../../libs/api";
 
 function GroupCalendarSection() {
     const { group } = useGroup();
-
     return (
         <Section>
             <Section.Header

@@ -14,12 +14,21 @@ import { BellSimple, Calendar, MapPin } from "@phosphor-icons/react";
 import { cv } from "../../../../../../libs/ui/style";
 import { CreateEventButton } from "../CreateButton";
 
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
+import { DateFormatter, DayPicker } from "react-day-picker";
+import dayjs from "dayjs";
+
 type DateMode = "normal" | "period";
 
 export function WriteDateContainer() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [event, setEvent] = useRecoilState(createEventDataAtom);
     const [, setMode] = useRecoilState(createEventWriteInfoModeAtom);
+
+    const formatCaption: DateFormatter = (month, options) => {
+        return <>{format(month, "yyyy년 MM월", { locale: options?.locale })}</>;
+    };
 
     const dateMode: DateMode = event.end ? "period" : "normal";
     const setDateMode = (mode: DateMode) => {
@@ -103,17 +112,30 @@ export function WriteDateContainer() {
             <Flex.Column gap="4px">
                 {dateMode === "normal" && (
                     <>
-                        <Flex.Row gap="8px">
-                            <DateInputLabel>날짜</DateInputLabel>
-                            <DateInput
-                                type="datetime-local"
-                                ref={inputRef}
-                                value={event.start?.dateTime}
-                                onChange={(e) =>
-                                    changeStartDate(e.target.value)
+                        <Flex.Center>
+                            <DayPicker
+                                mode="single"
+                                locale={ko}
+                                selected={dayjs(
+                                    event.start?.date || event.start?.dateTime
+                                ).toDate()}
+                                onSelect={(day) =>
+                                    changeStartDate(
+                                        dayjs(day).format("YYYY-MM-DD")
+                                    )
                                 }
+                                modifiersStyles={{
+                                    selected: {
+                                        backgroundColor: cv.secondary,
+                                        color: cv.primary,
+                                    },
+                                }}
+                                formatters={{
+                                    formatCaption,
+                                }}
+                                ISOWeek
                             />
-                        </Flex.Row>
+                        </Flex.Center>
                     </>
                 )}
                 {dateMode === "period" && (
