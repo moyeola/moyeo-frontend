@@ -25,3 +25,4 @@ export * from "./MeetResult";
 export * from "./ProfileItem";
 export * from "./HorizontalScroll";
 export * from "./Picker";
+export * from "./Span";
