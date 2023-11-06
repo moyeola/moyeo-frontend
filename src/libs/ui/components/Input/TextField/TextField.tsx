@@ -28,9 +28,14 @@ const StyledTextField = styled.input`
     border: none;
     padding: 8px;
     border-radius: 0px;
-    border-bottom: 2px solid ${cv.primary};
     font-size: 20px;
     background-color: transparent;
+
+    transition: 200ms;
+    border-bottom: 2px solid ${cv.gray05};
+    &:focus {
+        border-bottom: 2px solid ${cv.primary};
+    }
 `;
 
 const MaxLength = styled.span`
