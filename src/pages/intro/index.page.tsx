@@ -14,6 +14,7 @@ import { client } from "../../libs/api";
 import { APIResponseError } from "endpoint-client";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { cv } from "../../libs/ui/style";
 
 export function IntroPage() {
     const navigate = useNavigate();
@@ -62,7 +63,7 @@ export function IntroPage() {
                     gap={16}
                 >
                     <Image src={MoyeoColorLogo} width="160px" />
-                    <Text color="primary">
+                    <Text color={cv.primary} weight="600">
                         대학생들을 하나로 모아주는, 모여!
                     </Text>
                 </Flex>
