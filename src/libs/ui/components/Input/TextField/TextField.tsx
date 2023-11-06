@@ -27,6 +27,7 @@ const StyledTextField = styled.input`
     outline: none;
     border: none;
     padding: 8px;
+    border-radius: 0px;
     border-bottom: 2px solid ${cv.primary};
     font-size: 20px;
 `;
