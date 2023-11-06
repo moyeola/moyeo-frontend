@@ -92,9 +92,6 @@ export function EditMeetPage() {
                 console.error(error);
                 toast.error("일정 조율을 수정하는데 실패했습니다.");
             },
-            onMutate: () => {
-                console.log(times);
-            },
         }
     );
 
