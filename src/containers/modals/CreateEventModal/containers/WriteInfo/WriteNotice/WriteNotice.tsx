@@ -21,7 +21,6 @@ export function WriteNoticeContainer() {
     const [, setMode] = useRecoilState(createEventWriteInfoModeAtom);
 
     const [result, time, setHour, setAmPm, setMinute] = useTimePicker();
-    console.log(time);
 
     useEffect(() => {
         if (!inputRef.current) return;

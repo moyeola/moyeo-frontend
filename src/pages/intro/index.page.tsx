@@ -34,7 +34,7 @@ export function IntroPage() {
             onError: (err) => {
                 if (err instanceof APIResponseError) {
                     toast.error("서버에서 오류를 응답했어요.");
-                    console.log(err);
+                    console.error(err);
                 } else {
                     toast.error("알 수 없는 문제가 발생했어요.");
                     console.error(err);
@@ -45,7 +45,6 @@ export function IntroPage() {
 
     const googleLogin = useGoogleLogin({
         onSuccess: async (data) => {
-            console.log(data);
             mutate(data.code);
         },
         scope: "profile email",
