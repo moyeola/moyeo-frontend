@@ -22,10 +22,6 @@ const StyledIcon = styled.div`
     height: 24px;
 `;
 
-const StyledLabel = styled.div`
-    font-size: 11px;
-`;
-
 export interface NavBarDestinationProps {
     /**
      * NavBar에 사용되는 아이콘입니다, 사이즈를 24x24로 맞춰주세요.
@@ -37,7 +33,6 @@ export interface NavBarDestinationProps {
 }
 export function NavBarDestination({
     icon,
-    label,
     selected = false,
     onClick,
 }: NavBarDestinationProps) {
@@ -54,7 +49,6 @@ export function NavBarDestination({
                 }}
             >
                 <StyledIcon>{icon}</StyledIcon>
-                <StyledLabel>{label}</StyledLabel>
             </IconContext.Provider>
         </StyledContainer>
     );

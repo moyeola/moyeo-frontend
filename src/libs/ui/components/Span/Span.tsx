@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { styled } from "styled-components";
 
-export interface TextProps extends React.ComponentProps<"p"> {
+export interface SpanProps extends React.ComponentProps<"span"> {
     font?: "default" | "mono";
     weight?: string;
     warp?: "normal" | "nowrap" | "pre" | "pre-wrap";
@@ -10,7 +10,7 @@ export interface TextProps extends React.ComponentProps<"p"> {
     align?: "left" | "center" | "right";
 }
 
-interface StyledTextProps {
+interface StyledSpanProps {
     $font?: "default" | "mono";
     $weight?: string;
     $warp?: "normal" | "nowrap" | "pre" | "pre-wrap";
@@ -19,22 +19,22 @@ interface StyledTextProps {
     $align?: "left" | "center" | "right";
 }
 
-const StyledText = styled.p<StyledTextProps>`
+const StyledSpan = styled.span<StyledSpanProps>`
     font-family: ${(props) =>
         props.$font === "mono"
             ? "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace"
             : "inherit"};
-    font-weight: ${(props) => props.$weight || "400"};
-    font-size: ${(props) => props.$size || "16px"};
+    font-weight: ${(props) => props.$weight || "inherit"};
+    font-size: ${(props) => props.$size || "inherit"};
     color: ${(props) => props.$color || "inherit"};
-    white-space: ${(props) => props.$warp || "normal"};
+    white-space: ${(props) => props.$warp || "inherit"};
     text-align: ${(props) => props.$align || "inherit"};
 `;
 
-export const Text = forwardRef<HTMLParagraphElement, TextProps>(
+export const Span = forwardRef<HTMLSpanElement, SpanProps>(
     ({ font, weight, warp, size, color, align, children, ...props }, ref) => {
         return (
-            <StyledText
+            <StyledSpan
                 ref={ref}
                 $font={font}
                 $weight={weight}
@@ -45,7 +45,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
                 {...props}
             >
                 {children}
-            </StyledText>
+            </StyledSpan>
         );
     }
 );

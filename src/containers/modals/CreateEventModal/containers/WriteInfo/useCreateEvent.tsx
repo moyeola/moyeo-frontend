@@ -22,12 +22,11 @@ export function useCreateEvent() {
                 isOnline: event.isOnline,
             }),
         {
-            onSuccess: () => {
-                queryClient.invalidateQueries([
-                    "calendars",
-                    event.calendarId,
-                    "events",
-                ]);
+            onSuccess: async () => {
+                await queryClient.invalidateQueries({
+                    queryKey: ["calendars"],
+                });
+
                 resetEventAtom();
                 modal.closeAll();
                 event.callback?.();
