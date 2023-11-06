@@ -20,7 +20,8 @@ export function WriteNoticeContainer() {
     const [event] = useRecoilState(createEventDataAtom);
     const [, setMode] = useRecoilState(createEventWriteInfoModeAtom);
 
-    const [result, time, setHour, setAmPm, setMinute] = useTimePicker();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [result, _, setHour, setAmPm, setMinute] = useTimePicker();
 
     useEffect(() => {
         if (!inputRef.current) return;
