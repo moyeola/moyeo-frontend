@@ -30,6 +30,7 @@ const StyledTextField = styled.input`
     border-radius: 0px;
     border-bottom: 2px solid ${cv.primary};
     font-size: 20px;
+    background-color: transparent;
 `;
 
 const MaxLength = styled.span`
