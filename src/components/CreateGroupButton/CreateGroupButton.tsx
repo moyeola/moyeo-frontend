@@ -13,6 +13,7 @@ const StyledButton = styled.button`
     gap: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    color: ${cv.gray03};
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.05);
