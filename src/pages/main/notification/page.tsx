@@ -1,12 +1,10 @@
 import { CaretLeft } from "@phosphor-icons/react";
-import { Header, IconButton, Layout } from "../../../libs/ui";
+import { Header, IconButton, Layout, NotificationItem } from "../../../libs/ui";
 import { cv } from "../../../libs/ui/style";
 import { useQuery } from "react-query";
 import { client } from "../../../libs/api";
 import styled from "styled-components";
-import { NotificationItem } from "./components/NotificationItem";
 import { useNavigate } from "react-router-dom";
-import { TeamRequestItem } from "./components/TeamRequestItem";
 
 function NotificationHeader() {
     const navigate = useNavigate();
@@ -29,30 +27,9 @@ const StyledNotifications = styled.div`
     flex-direction: column;
 `;
 
-const Mock = () => {
-    return (
-        <NotificationItem
-            notification={{
-                id: 1,
-                type: "GROUP_SCHEDULE",
-                action: {
-                    type: "to",
-                    url: "/main/groups/1/schedules/1",
-                },
-                author: {
-                    type: "GROUP",
-                    id: 1,
-                    name: "프론트엔드 스터디",
-                },
-                body: "프론트엔드 스터디 일정이 추가되었습니다.",
-                createdAt: new Date().toISOString(),
-                title: "프론트엔드 스터디 일정.",
-            }}
-        />
-    );
-};
-
 export function NotificationPage() {
+    const navigate = useNavigate();
+
     const { data } = useQuery(["notifications"], () =>
         client.users.me.notifications.get({})
     );
@@ -62,15 +39,13 @@ export function NotificationPage() {
             <NotificationHeader />
             <Layout paddingTop="60px" paddingBottom="120px" minHeight="100dvh">
                 <StyledNotifications>
-                    <TeamRequestItem />
+                    {/* <TeamRequestItem /> */}
                     {data?.notifications.map((notification) => (
-                        <NotificationItem notification={notification} />
+                        <NotificationItem
+                            notification={notification}
+                            onClick={() => navigate(notification.action.url)}
+                        />
                     ))}
-                    <Mock />
-                    <Mock />
-                    <Mock />
-                    <Mock />
-                    <Mock />
                 </StyledNotifications>
             </Layout>
         </>

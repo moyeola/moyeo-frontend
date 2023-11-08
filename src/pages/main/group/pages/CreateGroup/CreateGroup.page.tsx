@@ -51,7 +51,7 @@ export function CreateGroupPage() {
             <Header bgColor={cv.bgOnboarding}>
                 <Header.Left>
                     <IconButton type="button" onClick={() => navigate(-1)}>
-                        <CaretLeft />
+                        <CaretLeft weight="bold" />
                     </IconButton>
                 </Header.Left>
                 <Header.Title>그룹 생성</Header.Title>

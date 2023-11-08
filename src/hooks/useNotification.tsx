@@ -53,7 +53,6 @@ export function useNotification() {
         const token = await getToken(messaging, {
             vapidKey: import.meta.env.VITE_VAPID_PUBLIC_KEY,
         });
-        console.log(token);
         mutate({
             token,
         });

@@ -8,6 +8,7 @@ const StyledTeamRequest = styled.div`
     padding: 16px;
     gap: 12px;
     border-bottom: 0.3px solid ${cv.gray05};
+    cursor: pointer;
 `;
 
 const StyledIcon = styled.div`

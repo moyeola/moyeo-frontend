@@ -1,11 +1,11 @@
 import { NotificationDto, NotificationType } from "moyeo-object";
 import styled from "styled-components";
-import { Flex, Image } from "../../../../libs/ui";
+import { Flex, Image } from "../..";
 
-import GroupScheduleIcon from "../assets/GroupSchedule.png";
-import MeetRequestIcon from "../assets/MeetRequestIcon.png";
+import GroupScheduleIcon from "./assets/GroupSchedule.png";
+import MeetRequestIcon from "./assets/MeetRequestIcon.png";
 import MoyeoLogoIcons from "../../../../assets/logo/moyeoColorLogo.png";
-import { cv } from "../../../../libs/ui/style";
+import { cv } from "../../style";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
@@ -18,6 +18,7 @@ const StyledNotificationContainer = styled.div`
     align-items: center;
     padding: 16px;
     gap: 12px;
+    cursor: pointer;
 `;
 
 const StyledLogo = styled.div`
@@ -60,10 +61,14 @@ const NotificationIconMap: Record<NotificationType, React.ReactNode> = {
 };
 export interface NotificationItemProps {
     notification: NotificationDto;
+    onClick?: () => void;
 }
-export function NotificationItem({ notification }: NotificationItemProps) {
+export function NotificationItem({
+    notification,
+    onClick,
+}: NotificationItemProps) {
     return (
-        <StyledNotificationContainer>
+        <StyledNotificationContainer onClick={onClick}>
             <StyledLogo>{NotificationIconMap[notification.type]}</StyledLogo>
             <Flex.Column
                 style={{
