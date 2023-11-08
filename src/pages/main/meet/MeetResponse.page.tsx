@@ -20,10 +20,11 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import { dayOfTheWeekMap } from "../../../libs/ui/utils/dayOfTheWeekMap";
 import { EditMeetModal } from "../../../containers/modals/EditMeetModal/EditMeetModal";
-import { useUser } from "../../../hooks/useUser";
+// import { useUser } from "../../../hooks/useUser";
 import { useGroup } from "../../../hooks/useGroup";
 import { CreateEventModal } from "../../../containers/modals/CreateEventModal/CreateEventModal";
 import { toast } from "react-toastify";
+import { DeleteMeetModal } from "../../../containers/modals/DeleteMeetModal/DeleteMeetModal";
 
 export function MeetResponsePage() {
     const modal = useModal();
@@ -34,7 +35,7 @@ export function MeetResponsePage() {
         end: string;
     }>();
 
-    const { user } = useUser();
+    // const { user } = useUser();
 
     const { data: meet } = useQuery(["meet", meetId], async () => {
         const res = await client.meets.get({
@@ -59,10 +60,10 @@ export function MeetResponsePage() {
         }
     );
 
-    const isCreator =
-        meet?.creator.type === "member" &&
-        meet.creator.member?.user?.id === user?.id &&
-        true;
+    // const isCreator =
+    //     meet?.creator.type === "member" &&
+    //     meet.creator.member?.user?.id === user?.id &&
+    //     true;
 
     return (
         <>
@@ -151,10 +152,24 @@ export function MeetResponsePage() {
                     </Section>
 
                     <Section>
-                        <Section.Header
-                            title="미참여 팀원들"
-                            // description="참여를 독려하기 위해 독촉하기를 해보세요"
-                        />
+                        {(
+                            group?.members.filter(
+                                (member) =>
+                                    !meet?.responses.some(
+                                        (response) =>
+                                            response.responser.type ===
+                                                "member" &&
+                                            response.responser.member?.id ===
+                                                member?.id
+                                    )
+                            ) || []
+                        ).length > 0 && (
+                            <Section.Header
+                                title="미참여 팀원들"
+                                // description="참여를 독려하기 위해 독촉하기를 해보세요"
+                            />
+                        )}
+
                         <HorizontalScroll>
                             {group?.members
                                 .filter(
@@ -184,9 +199,10 @@ export function MeetResponsePage() {
                         </HorizontalScroll>
                     </Section>
 
-                    {isCreator && (
-                        <Section>
-                            <Section.Header title="일정 조율 " />
+                    {/* {isCreator && ( */}
+                    <Section>
+                        <Section.Header title="일정 조율 " />
+                        <Flex.Between>
                             <SmallButton
                                 variant="secondary"
                                 onClick={() =>
@@ -198,8 +214,23 @@ export function MeetResponsePage() {
                             >
                                 일정조율 수정
                             </SmallButton>
-                        </Section>
-                    )}
+                            <SmallButton
+                                variant="red"
+                                onClick={() =>
+                                    meet &&
+                                    modal.open(
+                                        <DeleteMeetModal
+                                            meet={meet}
+                                            group={group}
+                                        />
+                                    )
+                                }
+                            >
+                                일정조율 삭제
+                            </SmallButton>
+                        </Flex.Between>
+                    </Section>
+                    {/* )} */}
                 </Flex.Column>
             </Layout>
             <BottomLayout>

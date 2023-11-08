@@ -1,4 +1,4 @@
-import { NoticeBell } from "../../../../../../components";
+// import { NoticeBell } from "../../../../../../components";
 import { Header, IconButton } from "../../../../../../libs/ui";
 import { cv } from "../../../../../../libs/ui/style";
 import { useGroup } from "../../../../../../hooks/useGroup";
@@ -27,9 +27,9 @@ export function GroupHeader() {
                 >
                     <PencilSimple />
                 </IconButton>
-                <IconButton>
+                {/* <IconButton>
                     <NoticeBell hasNotice={true} />
-                </IconButton>
+                </IconButton> */}
             </Header.Right>
         </Header>
     );

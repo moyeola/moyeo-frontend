@@ -6,8 +6,15 @@ import { CalendarRouter } from "./calendar/router";
 import { NotificationRouter } from "./notification/router";
 import { MeetRouter } from "./meet/router";
 import { MyPageRouter } from "./mypage/router";
+import { useNotification } from "../../hooks/useNotification";
+import { useEffect } from "react";
 
 export function MainRouter() {
+    const { openRequestModal } = useNotification();
+    useEffect(() => {
+        openRequestModal();
+    }, [openRequestModal]);
+
     return (
         <Routes>
             <Route path="/" element={<Redirect to="/main/home" />} />

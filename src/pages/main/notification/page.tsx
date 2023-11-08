@@ -1,10 +1,9 @@
 import { CaretLeft } from "@phosphor-icons/react";
-import { Header, IconButton } from "../../../libs/ui";
+import { Header, IconButton, Layout, NotificationItem } from "../../../libs/ui";
 import { cv } from "../../../libs/ui/style";
 import { useQuery } from "react-query";
 import { client } from "../../../libs/api";
 import styled from "styled-components";
-import { NotificationItem } from "./components/NotificationItem";
 import { useNavigate } from "react-router-dom";
 
 function NotificationHeader() {
@@ -29,6 +28,8 @@ const StyledNotifications = styled.div`
 `;
 
 export function NotificationPage() {
+    const navigate = useNavigate();
+
     const { data } = useQuery(["notifications"], () =>
         client.users.me.notifications.get({})
     );
@@ -36,11 +37,17 @@ export function NotificationPage() {
     return (
         <>
             <NotificationHeader />
-            <StyledNotifications>
-                {data?.notifications.map((notification) => (
-                    <NotificationItem notification={notification} />
-                ))}
-            </StyledNotifications>
+            <Layout paddingTop="60px" paddingBottom="120px" minHeight="100dvh">
+                <StyledNotifications>
+                    {/* <TeamRequestItem /> */}
+                    {data?.notifications.map((notification) => (
+                        <NotificationItem
+                            notification={notification}
+                            onClick={() => navigate(notification.action.url)}
+                        />
+                    ))}
+                </StyledNotifications>
+            </Layout>
         </>
     );
 }
