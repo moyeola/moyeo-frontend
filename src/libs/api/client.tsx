@@ -39,6 +39,7 @@ import {
     DeleteUserMeNotification,
     GetGroupInviteCode,
     PostGroupInvite,
+    PostUserMeNotificationRegister,
 } from "moyeo-object";
 
 export class MoyeoClient extends EndpointClient {
@@ -50,6 +51,7 @@ export class MoyeoClient extends EndpointClient {
             notifications: {
                 get: this.endpointBuilder(GetUserMeNotifications),
                 delete: this.endpointBuilder(DeleteUserMeNotification),
+                register: this.endpointBuilder(PostUserMeNotificationRegister),
             },
         },
     };

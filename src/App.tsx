@@ -6,6 +6,10 @@ import { BrowserRouter } from "react-router-dom";
 import { Flip, ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { FIREBASE_CONFIG } from "./config/fcmConfig";
+
 import "react-toastify/dist/ReactToastify.css";
 import "react-day-picker/dist/style.css";
 
@@ -16,6 +20,10 @@ const queryClient = new QueryClient({
         },
     },
 });
+
+const app = initializeApp(FIREBASE_CONFIG);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const analytics = getAnalytics(app);
 
 function App() {
     return (
