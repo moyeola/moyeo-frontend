@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { RootRouter } from "./pages/router";
@@ -22,7 +24,6 @@ const queryClient = new QueryClient({
 });
 
 const app = initializeApp(FIREBASE_CONFIG);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const analytics = getAnalytics(app);
 
 function App() {
