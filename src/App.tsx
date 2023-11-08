@@ -24,7 +24,7 @@ const queryClient = new QueryClient({
 });
 
 const app = initializeApp(FIREBASE_CONFIG);
-const analytics = getAnalytics(app);
+getAnalytics(app);
 
 function App() {
     return (
