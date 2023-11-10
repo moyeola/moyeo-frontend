@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { client } from "../../../libs/api";
 import {
@@ -25,6 +25,9 @@ import { useGroup } from "../../../hooks/useGroup";
 import { CreateEventModal } from "../../../containers/modals/CreateEventModal/CreateEventModal";
 import { toast } from "react-toastify";
 import { DeleteMeetModal } from "../../../containers/modals/DeleteMeetModal/DeleteMeetModal";
+
+import PressImage from "./press.svg";
+import { MeetPressFinishModal } from "./modal/meetPressFinishModal";
 
 export function MeetResponsePage() {
     const modal = useModal();
@@ -57,6 +60,24 @@ export function MeetResponsePage() {
                 ownerId: group?.id || -1,
             });
             return res.calendars;
+        }
+    );
+
+    const { mutate: expedite, isLoading: expediteLoading } = useMutation(
+        () =>
+            client.meets.expedite({
+                meetId: `${meetId}`,
+            }),
+        {
+            onSuccess: () => {
+                modal.open(<MeetPressFinishModal />);
+            },
+            onError: (err) => {
+                toast.error(
+                    `독촉하기에 실패했어요. 잠시 뒤에 다시 시도해주세요.`
+                );
+                console.error(err);
+            },
         }
     );
 
@@ -164,39 +185,50 @@ export function MeetResponsePage() {
                                     )
                             ) || []
                         ).length > 0 && (
-                            <Section.Header
-                                title="미참여 팀원들"
-                                // description="참여를 독려하기 위해 독촉하기를 해보세요"
-                            />
-                        )}
-
-                        <HorizontalScroll>
-                            {group?.members
-                                .filter(
-                                    (member) =>
-                                        !meet?.responses.some(
-                                            (response) =>
-                                                response.responser.type ===
-                                                    "member" &&
-                                                response.responser.member
-                                                    ?.id === member?.id
+                            <>
+                                <Section.Header
+                                    title="미참여 팀원들"
+                                    description="미참여 팀원들에게 '독촉 알림'을 보내고 싶다면, '독촉하기'를 클릭해보세요!"
+                                />
+                                <HorizontalScroll>
+                                    <ProfileItem
+                                        imageUrl={PressImage}
+                                        onClick={() => expedite()}
+                                        name={
+                                            expediteLoading ? "독촉 중..." : ``
+                                        }
+                                    />
+                                    {group?.members
+                                        .filter(
+                                            (member) =>
+                                                !meet?.responses.some(
+                                                    (response) =>
+                                                        response.responser
+                                                            .type ===
+                                                            "member" &&
+                                                        response.responser
+                                                            .member?.id ===
+                                                            member?.id
+                                                )
                                         )
-                                )
-                                .map((member) => {
-                                    return (
-                                        <ProfileItem
-                                            imageUrl={
-                                                member?.user?.profileImageUrl ||
-                                                ""
-                                            }
-                                            name={
-                                                member?.nickname ||
-                                                member?.user?.name
-                                            }
-                                        />
-                                    );
-                                })}
-                        </HorizontalScroll>
+                                        .map((member) => {
+                                            return (
+                                                <ProfileItem
+                                                    imageUrl={
+                                                        member?.user
+                                                            ?.profileImageUrl ||
+                                                        ""
+                                                    }
+                                                    name={
+                                                        member?.nickname ||
+                                                        member?.user?.name
+                                                    }
+                                                />
+                                            );
+                                        })}
+                                </HorizontalScroll>
+                            </>
+                        )}
                     </Section>
 
                     {/* {isCreator && ( */}

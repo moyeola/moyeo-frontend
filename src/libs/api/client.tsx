@@ -40,6 +40,7 @@ import {
     GetGroupInviteCode,
     PostGroupInvite,
     PostUserMeNotificationRegister,
+    PostMeetExpedite,
 } from "moyeo-object";
 
 export class MoyeoClient extends EndpointClient {
@@ -114,6 +115,7 @@ export class MoyeoClient extends EndpointClient {
         post: this.endpointBuilder(PostMeet),
         patch: this.endpointBuilder(PatchMeet),
         delete: this.endpointBuilder(DeleteMeet),
+        expedite: this.endpointBuilder(PostMeetExpedite),
         response: {
             get: this.endpointBuilder(GetMeetResponse),
             post: this.endpointBuilder(PostMeetResponse),

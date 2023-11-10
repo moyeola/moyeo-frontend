@@ -26,7 +26,7 @@ export interface HorizontalScrollProps
 export const HorizontalScroll = forwardRef<
     HTMLDivElement,
     HorizontalScrollProps
->(({ children, width = "100%", gap = "0px", ...props }, ref) => {
+>(({ children, width = "100%", gap = "8px", ...props }, ref) => {
     return (
         <StyledHorizontalScroll ref={ref} $width={width} $gap={gap} {...props}>
             {children}
