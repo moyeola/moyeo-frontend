@@ -1,7 +1,7 @@
 import { atom, useRecoilState } from "recoil";
 import { RequestNotificationPermissionModal } from "../containers/modals/RequestNotificationPermissionModal/RequestNotificationPermissionModal";
 import { useModal } from "../libs/ui";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { FIREBASE_CONFIG } from "../config/fcmConfig";
 import { initializeApp } from "firebase/app";
 import { getToken, getMessaging } from "firebase/messaging";
@@ -17,6 +17,8 @@ const isRequestNotificationModalOpenState = atom({
 });
 
 export function useNotification() {
+    const [isRequestLoading, setIsRequestLoading] = useState(false);
+
     const modal = useModal();
     const [
         isRequestNotificationModalOpenValue,
@@ -59,19 +61,23 @@ export function useNotification() {
     };
 
     const requestPermission = async () => {
+        setIsRequestLoading(true);
         const permission = await Notification.requestPermission();
         localStorage.setItem("isNotificationPermissionRequested", "true");
         if (permission === "granted") {
             await registerToken();
-            modal.close();
         } else {
             console.log("denied", permission);
         }
+
+        setIsRequestLoading(false);
+        modal.close();
     };
 
     return {
         openRequestModal,
         requestPermission,
         registerToken,
+        isRequestLoading,
     };
 }

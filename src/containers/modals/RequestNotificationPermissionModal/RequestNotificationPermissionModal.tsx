@@ -13,6 +13,7 @@ export function RequestNotificationPermissionModal() {
             <Modal.Footer>
                 <Button
                     onClick={async () => await notification.requestPermission()}
+                    isLoading={notification.isRequestLoading}
                 >
                     확인
                 </Button>
