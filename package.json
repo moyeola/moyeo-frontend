@@ -19,7 +19,7 @@
         "dayjs": "^1.11.9",
         "endpoint-client": "^0.1.1",
         "firebase": "^10.5.2",
-        "moyeo-object": "^0.6.26",
+        "moyeo-object": "^0.6.27",
         "phosphor": "^0.7.1",
         "phosphor-react": "^1.4.1",
         "react": "^18.2.0",
