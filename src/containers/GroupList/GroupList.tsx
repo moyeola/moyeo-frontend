@@ -28,7 +28,7 @@ export function GroupList() {
                             )
                         }
                         subtitle={group?.description}
-                        description="알림 2개"
+                        // description="알림 2개"
                         banner={{
                             type: "icon",
                             icon: "fire",
