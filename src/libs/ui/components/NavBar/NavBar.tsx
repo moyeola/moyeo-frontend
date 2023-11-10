@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { NavBarDestination } from "./NavBarDestination";
+import { cv } from "../../style";
 
 const StyledNavBarOuter = styled.div`
     position: fixed;
@@ -9,8 +10,7 @@ const StyledNavBarOuter = styled.div`
     background-color: #ffffff;
     display: flex;
     justify-content: center;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-top: 0.3px solid ${cv.gray05};
 `;
 
 const StyledNavBarInner = styled.div`
