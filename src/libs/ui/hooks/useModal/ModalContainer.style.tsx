@@ -9,8 +9,8 @@ export const StyledModalContainerWrapper = styled.div<StyledModalContainerWrappe
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     z-index: 10000;
     display: flex;
     align-items: ${(props) =>
